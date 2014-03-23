@@ -1,0 +1,29 @@
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>Skilda</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <ol class="breadcrumb">
+          <li><a href="/">Suche</a></li>
+          <li><a href="/skills">Fähigkeiten</a></li>
+          <li><a href="/employees">Mitarbeiter</a></li>
+          <li><a href="/database">Datenbank</a></li>
+        </ol>
+      </div>
+      <h1 class="brand">Skill Datenbank</h1>
+      <hr>
+      <div>
+        <%= yield %>
+      </div>
+      <footer>
+        <hr>
+        <p>&copy Matthias Baumgart & Sebastian Schmeck 2014</>
+      </footer>
+    </div>
+  </body>
+</html>

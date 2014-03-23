@@ -1,0 +1,24 @@
+<h3><%= skill.name %><h3>
+<table>
+  <tr>
+    <th>Kategorie</th>
+    <td><%= skill.category %></td>
+  </tr>
+  <tr>
+    <th>Synonyme</th>
+    <td><%= skill.synonyms.to_a.join(', ') %></td>
+  </tr>
+  <tr>
+    <th>Beschreibung</th>
+    <td><%= skill.description %></td>
+  </tr>
+  <tr>
+    <th>Mitarbeiter</th>
+    <td>
+      <% skill.employees_rels.each do |employees_rel| %>
+        <% employee = employees_rel.start_node %>
+        <a href="/employees/<%= employee.id %>"><%= employee.name %></a> (<%= employees_rel[:level] %>)
+      <% end %>
+    </td>
+  </tr>
+</table>

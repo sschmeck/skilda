@@ -1,0 +1,6 @@
+<h3>Mitarbeiter</h3>
+<ul>
+  <% employees.each do |employee| %>
+    <li><%= erb :list_item_employee, locals: { item: employee } %></li>
+  <% end %>
+</ul>

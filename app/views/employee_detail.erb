@@ -1,0 +1,12 @@
+<h3><%= employee.name %></h3>
+<table>
+  <tr>
+    <th>Skills</th>
+    <td>
+      <% employee.skills_rels.each do |skills_rel| %>
+        <% skill = skills_rel.end_node %>
+        <a href="/skills/<%= skill.id %>"><%= skill.name %></a> (<%= skills_rel[:level] %>)
+      <% end %>
+    </td>
+  </tr>
+</table>

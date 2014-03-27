@@ -1,24 +1,40 @@
-<h3><%= skill.name %><h3>
-<table>
-  <tr>
-    <th>Kategorie</th>
-    <td><%= skill.category %></td>
-  </tr>
-  <tr>
-    <th>Synonyme</th>
-    <td><%= skill.synonyms.to_a.join(', ') %></td>
-  </tr>
-  <tr>
-    <th>Beschreibung</th>
-    <td><%= skill.description %></td>
-  </tr>
-  <tr>
-    <th>Mitarbeiter</th>
-    <td>
-      <% skill.employees_rels.each do |employees_rel| %>
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/skills">Fähigkeiten</a></li>
+  <li class="active"><%= skill.name %></li>
+</ol>
+
+<h2><%= skill.name %></h2>
+	
+<div class="panel panel-default">
+	<div class="panel-heading">Details</div>
+	<ul class="list-group">
+    <li class="list-group-item"><strong>Kategorie</strong> <%= skill.category %></li>
+    <li class="list-group-item"><strong>Synonyme</strong> <%= skill.synonyms.to_a.join(', ') %></li>
+	</ul>
+	<div class="panel-body">
+	    <p><strong>Beschreibung</strong> <%= skill.description %></p>
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item"><strong>Mitarbeiter</strong> 
+			<% skill.employees_rels.each do |employees_rel| %>
         <% employee = employees_rel.start_node %>
-        <a href="/employees/<%= employee.id %>"><%= employee.name %></a> (<%= employees_rel[:level] %>)
+				<% 
+				case employees_rel[:level]
+				when "Grundlagen"
+					level = "B"
+				when "Fortgeschritten"
+					level = "A"
+				when "Professionell"
+					level = "P"
+				when "Expert"
+					level = "E"
+				else 
+					level = employees_rel[:level]
+				end
+				%>
+        <a href="/employees/<%= employee.id %>" title="<%= employee.name %> (<%= employees_rel[:level] %>)"><%= employee.name %> <span class="badge alert-info"><%= level %></span></a>
       <% end %>
-    </td>
-  </tr>
-</table>
+		</li>
+	</ul>
+</div>

@@ -1,2 +1,6 @@
+body,html,.container {
+   height:98%;
+}
+
 body { padding-top: 70px; }
 footer {  padding: 0.25em 0; }

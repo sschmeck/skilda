@@ -1,4 +1,6 @@
-<h3>Mitarbeiter</h3>
+<h3>Mitarbeiter  <a href="/employees/create" class="btn btn-default btn-xs" >
+  <span class="glyphicon glyphicon-plus"></span>
+</a></h3>
 <ul>
   <% employees.each do |employee| %>
     <li><%= erb :list_item_employee, locals: { item: employee } %></li>

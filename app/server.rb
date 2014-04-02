@@ -3,7 +3,10 @@ require 'sinatra/respond_with'
 
 require_relative 'config/initializers/setup_neo4j'
 
-
+SKILL_LEVELS = { "Grundlagen" => "B", 
+                 "Fortgeschritten" => "A",
+                 "Professionell" => "P",
+                 "Expert" => "E" }
 
 # routes
 get '/' do
@@ -38,22 +41,26 @@ post '/employees/create' do
 end
 
 get '/employees/:id' do |id|
-  erb :employee_detail, :locals => { :employee => Employee.find(id) }
+  erb :employee_detail, :locals => { :employee => Employee.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
+end
+
+post '/employees/:id' do |id|
+  employee = Employee.find(id)
+  skill_id = params['skill']
+  level = params['level']
+  
+  employee.skills.create(Skill.find(skill_id), :level => level)
+  
+  erb :employee_detail, :locals => { :employee => Employee.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
 
 get '/database' do
   respond_with :database, 'TODO'
 end
 
-helpers do
+helpers do  
   def abbreviate_skill_level(level) 
-    case level
-  	  when "Grundlagen"      then "B"
-  	  when "Fortgeschritten" then "A"
-  	  when "Professionell"   then "P"
-  	  when "Expert"          then "E"
-  	  else level
-  	end
+    SKILL_LEVELS[level]
   end
 end
 

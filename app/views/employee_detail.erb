@@ -4,19 +4,8 @@
 
 <% employee.skills_rels.each do |skills_rel| %>
   <% skill = skills_rel.end_node %>
-	<% 
-	case skills_rel[:level]
-	when "Grundlagen"
-		level = "B"
-	when "Fortgeschritten"
-		level = "A"
-	when "Professionell"
-		level = "P"
-	when "Expert"
-		level = "E"
-	else 
-		level = skills_rel[:level]
-	end
-	%>
-  <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %> <span class="badge alert-info"><%= level %></span></a>
+
+  <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %> 
+	  <span class="badge alert-info"><%=abbreviate_skill_level skills_rel[:level] %></span>
+	</a>
 <% end %>

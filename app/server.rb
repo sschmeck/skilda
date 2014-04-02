@@ -32,3 +32,16 @@ end
 get '/database' do
   respond_with :database, 'TODO'
 end
+
+helpers do
+  def abbreviate_skill_level(level) 
+    case level
+  	  when "Grundlagen"      then "B"
+  	  when "Fortgeschritten" then "A"
+  	  when "Professionell"   then "P"
+  	  when "Expert"          then "E"
+  	  else level
+  	end
+  end
+end
+

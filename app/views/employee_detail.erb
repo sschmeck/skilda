@@ -1,12 +1,11 @@
-<h3><%= employee.name %></h3>
-<table>
-  <tr>
-    <th>Skills</th>
-    <td>
-      <% employee.skills_rels.each do |skills_rel| %>
-        <% skill = skills_rel.end_node %>
-        <a href="/skills/<%= skill.id %>"><%= skill.name %></a> (<%= skills_rel[:level] %>)
-      <% end %>
-    </td>
-  </tr>
-</table>
+<h1><%= employee.name %></h1>
+
+<h2>Skills</h2>
+
+<% employee.skills_rels.each do |skills_rel| %>
+  <% skill = skills_rel.end_node %>
+
+  <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %> 
+	  <span class="badge alert-info"><%=abbreviate_skill_level skills_rel[:level] %></span>
+	</a>
+<% end %>

@@ -1,39 +1,6 @@
-form {
-  display: inline;
+body,html,.container {
+   height:98%;
 }
 
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.brand {
-  color: #428bca;
-}
-
-.search {
-  background: none repeat scroll 0% 0% #F8F7F6;
-  border-bottom: 1px solid #999;
-  padding: 0px;
-  width: 50%;
-  -moz-box-sizing: border-box;
-}
-
-.searchbox {
-  background: url('../search.png') no-repeat scroll 98% center transparent;
-  background-color: transparent;
-  background-image: url('../search.png');
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: 98% center;
-  background-clip: border-box;
-  background-origin: padding-box;
-  background-size: auto auto;
-  height: 30px;
-  width: 100%;
-  border: 0px;
-}
-
-footer {
-  padding: 0.25em 0;
-}
+body { padding-top: 70px; }
+footer {  padding: 0.25em 0; }

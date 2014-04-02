@@ -25,6 +25,18 @@ get '/employees' do
   erb :employee_list, locals: { employees: Employee.all }
 end
 
+get '/employees/create' do
+  erb :employee_create
+end
+
+post '/employees/create' do
+  firstname = params['first_name']
+  lastname = params['last_name']
+  puts "create employee: #{firstname} #{lastname}"
+  employee = Employee.create!(first_name:firstname, last_name:lastname)
+  erb :employee_detail, :locals => { :employee => employee }
+end
+
 get '/employees/:id' do |id|
   erb :employee_detail, :locals => { :employee => Employee.find(id) }
 end

@@ -1,9 +1,9 @@
 <h1><%= employee.name %></h1>
 
 <h2>Skills
-<button type="button" class="btn btn-default btn-xs">
-  <span class="glyphicon glyphicon-plus"></span>
-</button>
+	<a href="#form" class="btn btn-default btn-xs" >
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
 </h2>
 
 <% employee.skills_rels.each do |skills_rel| %>
@@ -14,6 +14,7 @@
 	</a>
 <% end %>
 
+<div id="form">
 <h3>Add Skill</h3>
 
 <form class="form-horizontal" role="form" action="/employees/<%= employee.id %>" method="post">
@@ -43,3 +44,4 @@
     </div>
   </div>
 </form>
+</div>

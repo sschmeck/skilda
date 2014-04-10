@@ -4,3 +4,6 @@ body,html,.container {
 
 body { padding-top: 70px; }
 footer {  padding: 0.25em 0; }
+
+#form { display: none; }
+#form:target { display:block; }

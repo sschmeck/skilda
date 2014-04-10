@@ -1,6 +1,10 @@
 <h1><%= employee.name %></h1>
 
-<h2>Skills</h2>
+<h2>Skills
+	<a href="#form" class="btn btn-default btn-xs" >
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
+</h2>
 
 <% employee.skills_rels.each do |skills_rel| %>
   <% skill = skills_rel.end_node %>
@@ -9,3 +13,35 @@
 	  <span class="badge alert-info"><%=abbreviate_skill_level skills_rel[:level] %></span>
 	</a>
 <% end %>
+
+<div id="form">
+<h3>Add Skill</h3>
+
+<form class="form-horizontal" role="form" action="/employees/<%= employee.id %>" method="post">
+  <div class="form-group">
+    <label for="skill" class="col-sm-2 control-label">Skill</label>
+    <div class="col-sm-10">
+				<select name="skill" class="form-control">
+					<% skills.each do |skill| %>
+						<option value="<%= skill.id %>"><%= skill.name %></option>
+					<% end %>
+				</select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="level" class="col-sm-2 control-label">Level</label>
+    <div class="col-sm-10">
+				<select name="level" class="form-control">
+					<% levels.each_key do |level| %>
+						<option><%= level %></option>
+					<% end %>
+				</select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">add</button>
+    </div>
+  </div>
+</form>
+</div>

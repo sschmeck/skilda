@@ -3,7 +3,7 @@
 </a></h3>
 <ul>
   <% persons.each do |person| %>
-    <li><%= erb :list_item_person, locals: { item: person } %></li>
+    <li><%= erb :"person/list_item", locals: { item: person } %></li>
   <% end %>
 </ul>
 

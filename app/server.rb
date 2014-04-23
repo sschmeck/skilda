@@ -24,30 +24,30 @@ get '/skills/:id' do |id|
   erb :skill_detail, :locals => { :skill => Skill.find(id) }
 end
 
-get '/employees' do
-  erb :employee_list, locals: { employees: Employee.all }
+get '/persons' do
+  erb :person_list, locals: { persons: Person.all }
 end
 
-post '/employees' do
-  firstname = params['first_name']
-  lastname = params['last_name']
-  puts "create employee: #{firstname} #{lastname}"
-  employee = Employee.create!(first_name:firstname, last_name:lastname)
-  erb :employee_detail, :locals => { :employee => employee, :skills => Skill.all, :levels => SKILL_LEVELS  }
+post '/persons' do
+  firstname = params['firstname']
+  lastname = params['lastname']
+  puts "create person: #{firstname} #{lastname}"
+  person = Person.create!(firstname:firstname, lastname:lastname)
+  erb :person_detail, :locals => { :person => person, :skills => Skill.all, :levels => SKILL_LEVELS  }
 end
 
-get '/employees/:id' do |id|
-  erb :employee_detail, :locals => { :employee => Employee.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
+get '/persons/:id' do |id|
+  erb :person_detail, :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
 
-post '/employees/:id' do |id|
-  employee = Employee.find(id)
+post '/persons/:id' do |id|
+  person = Person.find(id)
   skill_id = params['skill']
   level = params['level']
   
-  employee.skills.create(Skill.find(skill_id), :level => level)
+  person.skills.create(Skill.find(skill_id), :level => level)
   
-  erb :employee_detail, :locals => { :employee => Employee.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
+  erb :person_detail, :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
 
 get '/database' do
@@ -60,7 +60,7 @@ helpers do
   end
   
   def search(search)
-    Employee.search(search)
+    Person.search(search)
   end
 end
 

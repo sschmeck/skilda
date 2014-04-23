@@ -1,4 +1,4 @@
-<h1><%= employee.name %></h1>
+<h1><%= person.name %></h1>
 
 <h2>Skills
 	<a href="#form" class="btn btn-default btn-xs" >
@@ -6,7 +6,7 @@
 	</a>
 </h2>
 
-<% employee.skills_rels.each do |skills_rel| %>
+<% person.skills_rels.each do |skills_rel| %>
   <% skill = skills_rel.end_node %>
 
   <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %> 
@@ -17,7 +17,7 @@
 <div id="form">
 <h3>Add Skill</h3>
 
-<form class="form-horizontal" role="form" action="/employees/<%= employee.id %>" method="post">
+<form class="form-horizontal" role="form" action="/persons/<%= person.id %>" method="post">
   <div class="form-group">
     <label for="skill" class="col-sm-2 control-label">Skill</label>
     <div class="col-sm-10">

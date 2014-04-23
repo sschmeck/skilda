@@ -10,11 +10,11 @@
 	    <p><strong>Beschreibung</strong> <%= skill.description %></p>
 	</div>
 	<ul class="list-group">
-		<li class="list-group-item"><strong>Mitarbeiter</strong> 
-			<% skill.employees_rels.each do |employees_rel| %>
-        <% employee = employees_rel.start_node %>
-        <a href="/employees/<%= employee.id %>" title="<%= employee.name %> (<%= employees_rel[:level] %>)"><%= employee.name %> 
-					<span class="badge alert-info"><%=abbreviate_skill_level employees_rel[:level] %></span>
+		<li class="list-group-item"><strong>Personen</strong> 
+			<% skill.persons_rels.each do |persons_rel| %>
+        <% person = persons_rel.start_node %>
+        <a href="/persons/<%= person.id %>" title="<%= person.name %> (<%= persons_rel[:level] %>)"><%= person.name %> 
+					<span class="badge alert-info"><%=abbreviate_skill_level persons_rel[:level] %></span>
 				</a>
       <% end %>
 		</li>

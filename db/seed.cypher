@@ -1,9 +1,10 @@
 // execute with '$ neo4j-shell -file seed.cypher'
+MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r;
 
 CREATE
-  (e1:Employee {first_name:"Matthias",last_name:"Baumgart"}),
-  (e2:Employee {first_name:"Marco",last_name:"Dierenfeldt"}),
-  (e3:Employee {first_name:"Sebastian",last_name:"Schmeck"});
+  (p1:Person {firstname:"Matthias",lastname:"Baumgart"}),
+  (p2:Person {firstname:"Marco",lastname:"Dierenfeldt"}),
+  (p3:Person {firstname:"Sebastian",lastname:"Schmeck"});
 
 CREATE
   (s1:Skill {name:"Java",category:"Programmiersprache",synonyms:["Java 5","Java 6","JEE"],description:"Eine statisch typisierte Sprache."}),
@@ -13,27 +14,29 @@ CREATE
   (s5:Skill {name:"Lua",category:"Programmiersprache",synonyms:[],description:"Eine dynamisch typisierte Skriptsprache."});
 
 
-MATCH (e:Employee {last_name:"Schmeck"}), (s:Skill {name:"Ruby"})
+MATCH (e:Person {lastname:"Schmeck"}), (s:Skill {name:"Ruby"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);
-MATCH (e:Employee {last_name:"Schmeck"}), (s:Skill {name:"Java"})
+MATCH (e:Person {lastname:"Schmeck"}), (s:Skill {name:"Java"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);
-MATCH (e:Employee {last_name:"Schmeck"}), (s:Skill {name:"JavaScript"})
+MATCH (e:Person {lastname:"Schmeck"}), (s:Skill {name:"JavaScript"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Grundlagen"}]->(s);
-MATCH (e:Employee {last_name:"Schmeck"}), (s:Skill {name:"Neo4j"})
+MATCH (e:Person {lastname:"Schmeck"}), (s:Skill {name:"Neo4j"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Grundlagen"}]->(s);
 
-MATCH (e:Employee {last_name:"Baumgart"}), (s:Skill {name:"Ruby"})
+MATCH (e:Person {lastname:"Baumgart"}), (s:Skill {name:"Ruby"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Grundlagen"}]->(s);
-MATCH (e:Employee {last_name:"Baumgart"}), (s:Skill {name:"Java"})
+MATCH (e:Person {lastname:"Baumgart"}), (s:Skill {name:"Java"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);
-MATCH (e:Employee {last_name:"Baumgart"}), (s:Skill {name:"Neo4j"})
+MATCH (e:Person {lastname:"Baumgart"}), (s:Skill {name:"Neo4j"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Fortgeschritten"}]->(s);
+MATCH (p:Person {lastname:"Baumgart"}), (s:Skill {name:"Ruby"})
+CREATE UNIQUE (p)-[r:HAS_SKILL {level:"Grundlagen"}]->(s);
 
-MATCH (e:Employee {last_name:"Dierenfeldt"}), (s:Skill {name:"Java"})
+MATCH (e:Person {lastname:"Dierenfeldt"}), (s:Skill {name:"Java"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);
-MATCH (e:Employee {last_name:"Dierenfeldt"}), (s:Skill {name:"JavaScript"})
+MATCH (e:Person {lastname:"Dierenfeldt"}), (s:Skill {name:"JavaScript"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);
-MATCH (e:Employee {last_name:"Dierenfeldt"}), (s:Skill {name:"Neo4j"})
+MATCH (e:Person {lastname:"Dierenfeldt"}), (s:Skill {name:"Neo4j"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Grundlagen"}]->(s);
-MATCH (e:Employee {last_name:"Dierenfeldt"}), (s:Skill {name:"Lua"})
+MATCH (e:Person {lastname:"Dierenfeldt"}), (s:Skill {name:"Lua"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);

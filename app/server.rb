@@ -50,6 +50,14 @@ post '/persons/:id' do |id|
   erb :person_detail, :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
 
+get '/skillcategories' do
+  erb :"skillcategory/list", locals: { skillcategories: SkillCategory.all }
+end
+
+get '/skillcategories/:id' do |id|
+  erb :"skillcategory/detail", locals: { skillcategory: SkillCategory.find(id) }
+end
+
 get '/database' do
   respond_with :database, 'TODO'
 end

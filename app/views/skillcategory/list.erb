@@ -1,0 +1,6 @@
+<h3>Skillcategories</h3>
+<ul>
+  <% skillcategories.each do |skillcategory| %>
+    <li><%= erb :"skillcategory/list_item", locals: { item: skillcategory } %></li>
+  <% end %>
+</ul>

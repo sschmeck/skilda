@@ -3,7 +3,12 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Details</div>
 	<ul class="list-group">
-    <li class="list-group-item"><strong>Kategorie</strong> <%= skill.category %></li>
+    <li class="list-group-item"><strong>Kategorie</strong> 
+			<% skill.skillcategories_rels.each do |skillcategories_rel| %>
+				<% skillcategory = skillcategories_rel.start_node %>
+				<%= erb :"skillcategory/list_item", locals: { item: skillcategory } %>
+			<% end %>
+		</li>
     <li class="list-group-item"><strong>Synonyme</strong> <%= skill.synonyms.to_a.join(', ') %></li>
 	</ul>
 	<div class="panel-body">

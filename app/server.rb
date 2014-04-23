@@ -3,10 +3,10 @@ require 'sinatra/respond_with'
 
 require_relative 'config/initializers/setup_neo4j'
 
-SKILL_LEVELS = { "Grundlagen" => "B", 
-                 "Fortgeschritten" => "A",
+SKILL_LEVELS = { "Grundlagen" => "G", 
+                 "Fortgeschritten" => "F",
                  "Professionell" => "P",
-                 "Expert" => "E" }
+                 "Experte" => "E" }
 
 # routes
 get '/' do

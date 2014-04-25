@@ -7,8 +7,8 @@ class Skill
 
   validates :name, :presence => true
 
-  has_n(:persons).from(:HAS_SKILL)
-  has_n(:skillcategories).from(:IS_A)
+  has_n('persons').from(:HAS_SKILL)
+  has_n('categories', :IS_A)
 
 end
 

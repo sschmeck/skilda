@@ -3,9 +3,9 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Details</div>
 	<ul class="list-group">
-    <li class="list-group-item"><strong>Kategorie</strong> 
-			<% skill.skillcategories_rels.each do |skillcategories_rel| %>
-				<% skillcategory = skillcategories_rel.start_node %>
+    <li class="list-group-item"><strong>Kategorien</strong> 
+			<% skill.categories_rels.each do |skillcategories_rel| %>
+				<% skillcategory = skillcategories_rel.end_node %>
 				<%= erb :"skillcategory/list_item", locals: { item: skillcategory } %>
 			<% end %>
 		</li>

@@ -11,7 +11,7 @@ SKILL_LEVELS = { "Grundlagen" => "B",
 # routes
 get '/' do
   @search= params['search']
-  @results = @search ? Skill.all.to_a : [] 
+  @results = @search ? search(@search) : [] 
   puts "SKILL.all #{@results.inspect}"
   respond_with :index, 'TODO'
 end
@@ -57,6 +57,10 @@ end
 helpers do  
   def abbreviate_skill_level(level) 
     SKILL_LEVELS[level]
+  end
+  
+  def search(search)
+    Employee.search(search)
   end
 end
 

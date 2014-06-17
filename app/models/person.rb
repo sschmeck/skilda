@@ -3,6 +3,7 @@ class Person
 
   property :firstname
   property :lastname
+  property :year_of_birth
   
   validates :lastname, :presence => true
   

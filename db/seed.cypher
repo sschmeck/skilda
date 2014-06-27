@@ -37,3 +37,19 @@ MATCH (e:Employee {last_name:"Dierenfeldt"}), (s:Skill {name:"Neo4j"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Grundlagen"}]->(s);
 MATCH (e:Employee {last_name:"Dierenfeldt"}), (s:Skill {name:"Lua"})
 CREATE UNIQUE (e)-[r:HAS_SKILL {level:"Professionell"}]->(s);
+
+MERGE (pr:Project {abvr: "EVCOP", title: "Ein voll cooles Projekt", description: "Ein voll cooles Softwareprojekt."});
+MERGE (pr:Project {abvr: "skilda", title: "skilda: Skillprofile auf einem neuen Level.", description: "Mit skilda können Skillprofile erstellt, gesucht, gefunden und als PDF exportiert werden."});
+
+MATCH (pr:Project {abvr: "EVCOP"}), (p:Person {lastname:"Schmeck"})
+MERGE (p)-[:WORKED_FOR {from: "01.06.2013", to: "31.12.2013", as:{"Softwareentwickler"}}]->(pr);
+
+MATCH (pr:Project {abvr: "EVCOP"}), (p:Person {lastname:"Dierenfeldt"})
+MERGE (p)-[:WORKED_FOR {from: "01.06.2013", to: "31.12.2013", as:{"Softwareentwickler"}}]->(pr);
+
+MATCH (pr:Project {abvr: "skilda"}), (p:Person {lastname:"Schmeck"})
+MERGE (p)-[:WORKED_FOR {from: "01.01.2014", as:{"Softwareentwickler"}}]->(pr);
+
+MATCH (pr:Project {abvr: "skilda"}), (p:Person {lastname:"Baumgart"})
+MERGE (p)-[:WORKED_FOR {from: "01.01.2014", as:{"Softwareentwickler"}}]->(pr);
+

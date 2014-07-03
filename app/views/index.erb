@@ -9,7 +9,7 @@
     <h4><%= !@results.empty? ? 'Treffer' : 'Keine Treffer' %></h4>
     <ul>
       <% @results.each do |node| %>
-        <li><%= erb "#{node.labels.first}/list_item".to_sym, :locals => { :item => node } %></li>
+        <li><%= erb "#{node.labels.first.downcase}/list_item".to_sym, :locals => { :item => node } %></li>
       <% end %>
     </ul>
   <% end %>

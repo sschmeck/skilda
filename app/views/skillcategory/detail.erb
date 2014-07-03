@@ -1,0 +1,8 @@
+<h2>Skillcategory: <%= skillcategory.name %></h2>
+
+<ul>
+	<% skillcategory.skills_rels.each do |skills_rel| %>
+  	<% skill = skills_rel.start_node %>
+    	<li><a href="/skills/<%= skill.id %>" title="<%= skill.name %>"><%= skill.name %></a></li>
+  <% end %>
+</ul>

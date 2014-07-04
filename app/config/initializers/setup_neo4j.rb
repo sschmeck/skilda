@@ -41,7 +41,8 @@ Neo4j::Session.open(db_config['session_type'].to_sym,
 # load models
 puts "Loading models .."
 model_dir = File.join(File.dirname(__FILE__), '..', '..', 'models')
-Dir.glob(File.join(model_dir, '*')).each do |f|
+puts Dir.glob(File.join(model_dir, '*')).inspect
+Dir.glob(File.join(model_dir, '*.rb')).each do |f|
  puts "  #{File.basename(f, File.extname(f)).camelize}"
  require f 
 end

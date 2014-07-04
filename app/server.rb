@@ -3,6 +3,10 @@ require 'sinatra/respond_with'
 
 require_relative 'config/initializers/setup_neo4j'
 
+require_relative 'business/pdf_creator'
+
+include PdfCreator
+
 SKILL_LEVELS = { "Grundlagen" => "G", 
                  "Fortgeschritten" => "F",
                  "Professionell" => "P",
@@ -37,8 +41,16 @@ post '/persons' do
 end
 
 get '/persons/:id' do |id|
+  # pass unless request.accept? 'text/html'
   erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
+
+
+get '/persons/:id/pdf' do |id|
+  # pass unless request.accept? 'application/pdf'
+  PdfCreator.create(Person.find(id))
+end
+
 
 post '/persons/:id' do |id|
   person = Person.find(id)

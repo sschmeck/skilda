@@ -62,6 +62,12 @@ get '/database' do
   respond_with :database, 'TODO'
 end
 
+
+get '/projects' do
+  erb :"project/list", locals: { projects: Project.all}
+end
+
+
 helpers do  
   def abbreviate_skill_level(level) 
     SKILL_LEVELS[level]

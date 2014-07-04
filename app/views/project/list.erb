@@ -1,0 +1,6 @@
+<h3>Projekte</h3>
+<ul>
+  <% projects.each do |project| %>
+      <li><%= erb :"project/list_item", locals: {item: project} %></li>
+  <% end %>
+</ul>

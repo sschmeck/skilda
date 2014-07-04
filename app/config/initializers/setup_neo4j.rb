@@ -1,7 +1,6 @@
 require 'neo4j'
 
 
-
 # monkey patch gem
 puts "Patching support for upper case relation names .."
 Neo4j::ActiveNode::HasN::ClassMethods.module_eval do
@@ -33,15 +32,18 @@ end
 # connect to database
 db_config_file = File.join(File.dirname(__FILE__), '..', 'neo4j.yml')
 db_config = YAML.load(File.read(db_config_file))
-puts "Setting up database with #{db_config.inspect} .."
-Neo4j::Session.open(db_config['session_type'].to_sym,
-                    "http://#{db_config['host']}:#{db_config['port']}")
-
+begin
+  Neo4j::Session.open(db_config['session_type'].to_sym,
+                      "http://#{db_config['host']}:#{db_config['port']}")
+rescue
+  puts "Could not establish connection to neo4j with configuration #{db_config.inspect}!"
+  exit 1
+end 
+puts "Connected to neo4j (#{db_config.inspect})"
 
 # load models
 puts "Loading models .."
 model_dir = File.join(File.dirname(__FILE__), '..', '..', 'models')
-puts Dir.glob(File.join(model_dir, '*')).inspect
 Dir.glob(File.join(model_dir, '*.rb')).each do |f|
  puts "  #{File.basename(f, File.extname(f)).camelize}"
  require f 

@@ -67,6 +67,14 @@ get '/projects' do
   erb :"project/list", locals: { projects: Project.all}
 end
 
+post '/projects' do
+  abvr = params['abvr']
+  description = params['description']
+  title = params['title']
+  puts "create project: #{abvr} #{description} #{title}"
+  person = Project.create!(abvr:abvr, description:description, title:title)
+  respond_with :index, 'TODO'
+end
 
 helpers do  
   def abbreviate_skill_level(level) 

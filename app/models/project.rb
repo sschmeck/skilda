@@ -7,3 +7,4 @@ class Project
   property :title
 
 end
+

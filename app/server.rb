@@ -67,6 +67,10 @@ get '/projects' do
   erb :"project/list", locals: { projects: Project.all}
 end
 
+get '/projects/:id' do |id|
+  erb :"project/detail", :locals => { :project => Project.find(id) }
+end
+
 
 helpers do  
   def abbreviate_skill_level(level) 

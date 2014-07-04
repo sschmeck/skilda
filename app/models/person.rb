@@ -8,6 +8,7 @@ class Person
   validates :lastname, :presence => true
   
   has_n('skills', :HAS_SKILL)
+  has_n('projects', :WORKED_FOR)
   
   def name
     "#{firstname} #{lastname}"

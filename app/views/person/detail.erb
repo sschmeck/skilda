@@ -45,3 +45,13 @@
   </div>
 </form>
 </div>
+
+<h2>Projekte
+</h2>
+
+<% person.projects_rels.each do |projects_rel| %>
+  <% project = projects_rel.end_node %>
+
+  <a href="/projects/<%= project.id %>" title="<%= project.title %>"><%= project.title %> </a>
+<% end %>
+

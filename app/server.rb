@@ -5,7 +5,7 @@ require_relative 'config/initializers/setup_neo4j'
 
 require_relative 'business/pdf_creator'
 
-include PdfCreator
+helpers PdfCreator
 
 SKILL_LEVELS = { "Grundlagen" => "G", 
                  "Fortgeschritten" => "F",
@@ -39,14 +39,18 @@ post '/persons' do
 end
 
 get '/persons/:id' do |id|
-  # pass unless request.accept? 'text/html'
   erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
 
 
 get '/persons/:id/pdf' do |id|
-  # pass unless request.accept? 'application/pdf'
-  PdfCreator.create(Person.find(id))
+  content_type 'application/pdf'
+
+  # 'attachment' tells the browser to download the file instead of showing it inline in the browser.
+  # the file name is the one the browser suggests to use in the save dialog.
+  attachment 'skill_profile.pdf'
+
+  create_person(Person.find(id))
 end
 
 

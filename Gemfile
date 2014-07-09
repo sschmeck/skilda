@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
-gem 'neo4j', '3.0.0.alpha.3'
+gem 'neo4j', '>= 3.0.0.alpha.7'
 # workaround to run rake neo4j:install
 gem 'neography'
 

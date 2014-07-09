@@ -1,20 +1,17 @@
-require_relative '../app/server'
-require 'rspec'
-require 'rack/test'
+require File.expand_path '../spec_helper.rb', __FILE__
 
 describe 'Skilda Webapp' do
-  include Rack::Test::Methods
 
-  def app
-    Sinatra::Application
+  it "should allow accessing the home page" do
+    get '/'
+    last_response.should be_ok
   end
 
-  it 'should list skills' do
-    get '/skills'
+  it "shows all skills" do
+    get "/skills"
     last_response.should be_ok
-    ['<title>Skilda</title>', '<b>Java<\/b>', '<b>Lua</b>', '<b>Neo4j</b>'].each do |s|
-      last_response.body.should =~ Regexp.new(s)
-    end
+
+    %w{Skills Ruby Java}.each{|r| last_response.body.should =~ /#{r}/}
   end
 
   it 'should return Java on skill id 17 ' do

@@ -30,16 +30,20 @@ end
 
 
 # connect to database
-db_config_file = File.join(File.dirname(__FILE__), '..', 'neo4j.yml')
-db_config = YAML.load(File.read(db_config_file))
 begin
-  Neo4j::Session.open(db_config['session_type'].to_sym,
-                      "http://#{db_config['host']}:#{db_config['port']}")
-rescue
-  puts "Could not establish connection to neo4j with configuration #{db_config.inspect}!"
+  neo4j_url = ENV['GRAPHENEDB_URL'] || 'http://localhost:7474'
+ 
+  uri = URI.parse(neo4j_url)
+ 
+  server_url = "http://#{uri.host}:#{uri.port}"
+ 
+  Neo4j::Session.open(:server_db, 
+                      server_url,
+                      basic_auth: { username: uri.user, password: uri.password})
+rescue => error
+  puts "Could not establish connection to neo4j database: #{error}"
   exit 1
 end 
-puts "Connected to neo4j (#{db_config.inspect})"
 
 # load models
 puts "Loading models .."

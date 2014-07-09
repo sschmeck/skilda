@@ -12,7 +12,8 @@ SKILL_LEVELS = { "Grundlagen" => "G",
 get '/' do
   @search= params['search']
   @results = @search ? search(@search) : [] 
-  respond_with :index, 'TODO'
+
+  erb :index
 end
 
 get '/skills' do
@@ -31,6 +32,7 @@ post '/persons' do
   firstname = params['firstname']
   lastname = params['lastname']
   person = Person.create!(firstname:firstname, lastname:lastname)
+
   erb :"person/detail", :locals => { :person => person, :skills => Skill.all, :levels => SKILL_LEVELS  }
 end
 
@@ -57,7 +59,7 @@ get '/skillcategories/:id' do |id|
 end
 
 get '/database' do
-  respond_with :database, 'TODO'
+  erb :database
 end
 
 
@@ -74,7 +76,7 @@ post '/projects' do
   description = params['description']
   title = params['title']
   person = Project.create!(abvr:abvr, description:description, title:title)
-  respond_with :index, 'TODO'
+  erb :index
 end
 
 helpers do  

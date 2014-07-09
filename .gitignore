@@ -2,4 +2,4 @@
 .bundle/
 neo4j
 
-Gemfile.lock
+#Gemfile.lock

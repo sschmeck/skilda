@@ -11,7 +11,7 @@ describe 'Skilda Webapp' do
     get "/skills"
     last_response.should be_ok
 
-    %w{Skills Ruby Java}.each{|r| last_response.body.should =~ /#{r}/}
+    %w{Fähigkeiten Ruby Java}.each{|r| last_response.body.should =~ /#{r}/}
   end
 
   it 'should return Java on skill id 17 ' do

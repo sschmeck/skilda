@@ -3,6 +3,10 @@ require 'sinatra/respond_with'
 
 require_relative 'config/initializers/setup_neo4j'
 
+require_relative 'business/pdf_creator'
+
+helpers PdfCreator
+
 SKILL_LEVELS = { "Grundlagen" => "G", 
                  "Fortgeschritten" => "F",
                  "Professionell" => "P",
@@ -39,6 +43,18 @@ end
 get '/persons/:id' do |id|
   erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
 end
+
+
+get '/persons/:id/pdf' do |id|
+  content_type 'application/pdf'
+
+  # 'attachment' tells the browser to download the file instead of showing it inline in the browser.
+  # the file name is the one the browser suggests to use in the save dialog.
+  attachment 'skill_profile.pdf'
+
+  create_person(Person.find(id))
+end
+
 
 post '/persons/:id' do |id|
   person = Person.find(id)

@@ -1,8 +1,9 @@
 language: ruby
 
-services:
-  - neo4j
+before_script:
+  - bundle exec rake neo4j:install
+  - bundle exec rake neo4j:start
+  #- bundle exec rake neo4j:populate
 
 script:
-  #- bundle exec rake neo4j:populate
   - bundle exec rake spec

@@ -55,6 +55,7 @@ GEM
       rubyzip (>= 1.0.0)
     orm_adapter (0.5.0)
     os (0.9.6)
+    pdfkit (0.6.2)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -103,6 +104,7 @@ PLATFORMS
 DEPENDENCIES
   neo4j (>= 3.0.0.alpha.7)
   neography
+  pdfkit
   rack-test
   rspec
   sinatra

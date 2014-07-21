@@ -21,7 +21,17 @@ get '/' do
 end
 
 get '/skills' do
-  erb :"skill/list", locals: { skills: Skill.all }
+  erb :"skill/list", locals: { skills: Skill.all, categories: SkillCategory.all }
+end
+
+post '/skills' do
+  name = params['name']
+  category_id = params['category']
+  description = params['description']
+  skill = Skill.create!(name:name, description:description) 
+  skill.categories.create(SkillCategory.find(category_id))
+  
+  redirect "/skills/#{skill.id}"
 end
 
 get '/skills/:id' do |id|

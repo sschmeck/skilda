@@ -2,3 +2,7 @@ language: ruby
 
 services:
   - neo4j
+
+script:
+  #- bundle exec rake neo4j:populate
+  - bundle exec rake spec

@@ -3,7 +3,7 @@ language: ruby
 before_script:
   - bundle exec rake neo4j:install
   - bundle exec rake neo4j:start
-  #- bundle exec rake neo4j:populate
+  - bundle exec rake neo4j:seed
 
 script:
   - bundle exec rake spec

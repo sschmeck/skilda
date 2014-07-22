@@ -5,7 +5,7 @@
 ## Getting started
 
 * requires Ruby >= 1.9, bundler
-
+* pdfkit gem needs wkhtmltopdf ({{sudo apt-get install wkhtmltopdf}})
 ```
 bundle install       # installs dependencies
 rake neo4j:install   # installs neo4j server (community, 2.0.1)

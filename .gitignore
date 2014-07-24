@@ -1,5 +1,5 @@
 .idea
 .bundle/
-neo4j
+/neo4j
 
 #Gemfile.lock

@@ -1,5 +1,5 @@
 require 'neo4j'
-
+require_relative '../../neo4j/db'
 
 # monkey patch gem
 puts "Patching support for upper case relation names .."
@@ -28,27 +28,13 @@ Neo4j::ActiveNode::HasN::ClassMethods.module_eval do
     end
 end
 
-
 # connect to database
-begin
-  neo4j_url = ENV['GRAPHENEDB_URL'] || 'http://localhost:7474'
- 
-  uri = URI.parse(neo4j_url)
- 
-  server_url = "http://#{uri.host}:#{uri.port}"
- 
-  Neo4j::Session.open(:server_db, 
-                      server_url,
-                      basic_auth: { username: uri.user, password: uri.password})
-rescue => error
-  puts "Could not establish connection to neo4j database: #{error}"
-  exit 1
-end 
+puts "Establish neo4j connection .."
+Neo4j::Db.establish_connection
 
 # load models
 puts "Loading models .."
 model_dir = File.join(File.dirname(__FILE__), '..', '..', 'models')
 Dir.glob(File.join(model_dir, '*.rb')).each do |f|
- puts "  #{File.basename(f, File.extname(f)).camelize}"
  require f 
 end

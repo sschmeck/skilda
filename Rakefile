@@ -10,6 +10,8 @@ end
 namespace :neo4j do
   desc 'Executes db/seed.cypher'
   task :seed do
-    system('./neo4j/bin/neo4j-shell -file ./db/seed.cypher')
+    require_relative 'app/neo4j/db'
+    Neo4j::Db.execute_file(File.join(File.dirname(__FILE__), 'db', 'seed.cypher'))
+    #system('./neo4j/bin/neo4j-shell -file ./db/seed.cypher')
   end
 end

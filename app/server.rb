@@ -13,7 +13,7 @@ get '/' do
   @search= params['search']
   @results = @search ? search(@search) : [] 
   puts "SKILL.all #{@results.inspect}"
-  respond_with :index, 'TODO'
+  erb :index
 end
 
 get '/skills' do
@@ -26,6 +26,10 @@ end
 
 get '/persons' do
   erb :"person/list", locals: { persons: Person.all }
+end
+
+get '/projects/:id' do |id|
+  erb :"project/detail", :locals => { :project => Project.find(id) }
 end
 
 post '/persons' do

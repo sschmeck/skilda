@@ -9,4 +9,5 @@ gem 'neo4j', '3.0.0.alpha.3'
 gem 'neography'
 
 gem 'rspec'
+gem 'shotgun'
 gem 'rack-test'

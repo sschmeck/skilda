@@ -22,7 +22,10 @@ class Person
       []
     else 
        r = Skill.neo4j_session._query("MATCH (p:Person)-[r:HAS_SKILL]-(s:Skill) WHERE s.name =~ '(?i).*#{search}.*' RETURN DISTINCT ID(p);")
-       Skill.neo4j_session.search_result_to_enumerable(r).to_a
+       puts "r: #{r.inspect}"
+       puts "source from : #{Skill.neo4j_session.method(:search_result_to_enumerable).source_location}"
+       # Skill.neo4j_session.search_result_to_enumerable(r).to_a
+      []
     end
   end
 

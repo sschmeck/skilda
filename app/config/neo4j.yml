@@ -1,6 +1,0 @@
-# neo4j connetions
-session_type: server_db
-
-# properties for type server_db
-host: localhost
-port: 7474

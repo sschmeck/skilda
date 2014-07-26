@@ -1,0 +1,18 @@
+<h1><%= project.title %> (<%= project.abvr %>)</h1>
+
+<div class="panel panel-default">
+	<div class="panel-heading">Details</div>
+
+	<div class="panel-body">
+	    <p><strong>Beschreibung</strong> <%= project.description %></p>
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item"><strong>Personen</strong> 
+			<% project.persons_rels.each do |persons_rel| %>
+        <% person = persons_rel.start_node %>
+        <a href="/persons/<%= person.id %>" title="<%= person.name %> (<%= persons_rel[:level] %>)"><%= person.name %> 
+				</a>
+      <% end %>
+		</li>
+	</ul>
+</div>

@@ -6,13 +6,25 @@
 	</a>
 </h2>
 
+<p>
+
 <% person.skills_rels.each do |skills_rel| %>
   <% skill = skills_rel.end_node %>
 
-  <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %> 
+  <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %>
 	  <span class="badge alert-info"><%=abbreviate_skill_level skills_rel[:level] %></span>
 	</a>
 <% end %>
+</p>
+
+
+<p>
+    <a class="btn btn-default" href="/persons/<%= person.id %>/pdf">
+        <span class="glyphicon glyphicon-floppy-save">
+            Export PDF
+        </span>
+    </a>
+</p>
 
 <div id="form">
 <h3>Add Skill</h3>
@@ -45,3 +57,13 @@
   </div>
 </form>
 </div>
+
+<h2>Projekte
+</h2>
+
+<% person.projects_rels.each do |projects_rel| %>
+  <% project = projects_rel.end_node %>
+
+  <a href="/projects/<%= project.id %>" title="<%= project.title %>"><%= project.title %> </a>
+<% end %>
+

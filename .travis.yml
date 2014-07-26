@@ -1,0 +1,15 @@
+language: ruby
+
+before_script:
+- bundle exec rake neo4j:install
+- bundle exec rake neo4j:start
+- bundle exec rake neo4j:seed
+
+script:
+- bundle exec rake spec
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: n5s2R+t+PZ/KemXIUCQn6ha0RAP5WSK/IGSBuahnQ4TJ95kDwQXr08Iu9eHVDh/bxN+7uzWORlddxo5Ch9TDsTpl323U7PkCgNPUfYb55OM8GPbnzheQ1l/5Fn1v2555u/Ot0kwdXKkPcDTkBdklf8ujfAb2CzjL+seDfMXUoog=
+  run: "rake neo4j:seed"

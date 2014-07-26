@@ -3,3 +3,5 @@
 /neo4j
 
 #Gemfile.lock
+
+/coverage

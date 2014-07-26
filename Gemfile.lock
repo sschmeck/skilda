@@ -96,6 +96,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    wkhtmltopdf-heroku (1.0.0)
     zip (2.0.2)
 
 PLATFORMS
@@ -109,3 +110,4 @@ DEPENDENCIES
   rspec
   sinatra
   sinatra-contrib
+  wkhtmltopdf-heroku

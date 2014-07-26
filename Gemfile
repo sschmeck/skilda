@@ -9,5 +9,13 @@ gem 'neo4j', '>= 3.0.0.alpha.7'
 gem 'neography'
 
 gem 'pdfkit'
-gem 'rspec'
-gem 'rack-test'
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+end
+
+group :production do
+  # enable pdfkit on heroku
+  gem 'wkhtmltopdf-heroku'
+end

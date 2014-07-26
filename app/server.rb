@@ -3,6 +3,7 @@ require 'sinatra/respond_with'
 
 require_relative 'config/initializers/setup_neo4j'
 
+require 'wkhtmltopdf-heroku' if production?
 require_relative 'business/pdf_creator'
 
 helpers PdfCreator

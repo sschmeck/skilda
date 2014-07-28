@@ -10,9 +10,10 @@ gem 'neography'
 
 gem 'pdfkit'
 
-group :test do
+group :test, :development do
   gem 'rspec'
   gem 'rack-test'
+  gem 'capybara'
   gem 'coveralls'
 end
 

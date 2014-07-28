@@ -7,6 +7,9 @@
 # Bundler.require :default, Sinatra::Application.environment
 require 'rack/test'
 
+require 'coveralls'
+Coveralls.wear!
+
 require File.expand_path '../../app/server.rb', __FILE__
 
 ENV['RACK_ENV'] = 'test'

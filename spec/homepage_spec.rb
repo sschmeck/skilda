@@ -34,5 +34,4 @@ describe 'Skilda Webapp' do
     end
 
   end
-
 end

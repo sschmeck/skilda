@@ -1,9 +1,9 @@
+require_relative '../app/server'
 require 'rack/test'
+require 'capybara/rspec'
 
 require 'coveralls'
 Coveralls.wear!
-
-require File.expand_path '../../app/server.rb', __FILE__
 
 ENV['RACK_ENV'] = 'test'
 
@@ -12,4 +12,10 @@ module RSpecMixin
   def app() Sinatra::Application end
 end
 
-RSpec.configure { |c| c.include RSpecMixin }
+RSpec.configure { |c|
+  c.include RSpecMixin
+  c.include Capybara::DSL#, feature: true
+  c.include Capybara::RSpecMatchers#, feature: true
+}
+
+Capybara.app = Sinatra::Application

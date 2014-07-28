@@ -1,8 +1,8 @@
 <form role="form" action="/" method="get">
 	<div class="input-group">
-  	<input type="search" class="form-control" name="search" value="<%= @search %>">
+  	<input id="search" type="search" class="form-control" name="search" value="<%= @search %>">
   	<span class="input-group-btn">
-      <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+      <button id="search-btn" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
     </span>
   </div>
   <% if !@search.nil? %>

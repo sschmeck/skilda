@@ -11,6 +11,7 @@ gem 'neography'
 gem 'pdfkit'
 
 group :test, :development do
+  gem 'shotgun'
   gem 'rspec'
   gem 'rack-test'
   gem 'capybara'

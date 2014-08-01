@@ -2,6 +2,8 @@ require_relative '../app/server'
 require 'rack/test'
 require 'capybara/rspec'
 
+require_relative 'spec_helper_neo4j'
+
 require 'coveralls'
 Coveralls.wear!
 

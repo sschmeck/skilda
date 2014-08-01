@@ -1,7 +1,7 @@
-<h3>Personen  <a href="#form" class="btn btn-default btn-xs" >
+<h3>Personen  <a id="create-btn" href="#form" class="btn btn-default btn-xs" >
   <span class="glyphicon glyphicon-plus"></span>
 </a></h3>
-<ul>
+<ul id="item-list">
   <% persons.each do |person| %>
     <li><%= erb :"person/list_item", locals: { item: person } %></li>
   <% end %>

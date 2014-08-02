@@ -30,19 +30,20 @@ describe 'Skilda Webapp' do
       p1.skills.create(s)
       p2.skills.create(s)
 
-      fill_in('search', :with => 'Java')
+      fill_in('search', with: 'Java')
       click_button('search-btn')
 
       result_list = all('//ul[@id="result-list"]/li')
       expect(result_list.size).to eq(2)
-      expect(result_list.map{|li| li.text.split("\s").first}.sort).to eq(%w{Marco Thomas})
+      expect(result_list.map { |li| li.text.split("\s").first } .sort).to eq(%w{Marco Thomas})
     end
 
     it 'should perform a unsuccesful search' do
-      fill_in('search', :with => 'Jabba')
+      fill_in('search', with: 'Jabba')
       click_button('search-btn')
       expect(page).to have_content('Keine Treffer')
     end
 
   end
+
 end

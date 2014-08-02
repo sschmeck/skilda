@@ -15,7 +15,7 @@ SKILL_LEVELS = { "Grundlagen" => "G",
 
 # routes
 get '/' do
-  @search= params['search']
+  @search = params['search']
   @results = @search ? search(@search) : [] 
 
   erb :index
@@ -29,14 +29,14 @@ post '/skills' do
   name = params['name']
   category_id = params['category']
   description = params['description']
-  skill = Skill.create!(name:name, description:description) 
+  skill = Skill.create!(name: name, description: description) 
   skill.categories.create(SkillCategory.find(category_id))
   
   redirect "/skills/#{skill.id}"
 end
 
 get '/skills/:id' do |id|
-  erb :"skill/detail", :locals => { :skill => Skill.find(id) }
+  erb :"skill/detail", locals: { skill: Skill.find(id) }
 end
 
 get '/persons' do
@@ -46,21 +46,18 @@ end
 post '/persons' do
   firstname = params['firstname']
   lastname = params['lastname']
-  person = Person.create!(firstname:firstname, lastname:lastname)
+  person = Person.create!(firstname: firstname, lastname: lastname)
 
-  erb :"person/detail", :locals => { :person => person, :skills => Skill.all, :levels => SKILL_LEVELS  }
+  erb :"person/detail", locals: { person: person, skills: Skill.all, levels: SKILL_LEVELS }
 end
 
 get '/persons/:id' do |id|
-  erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
+  erb :"person/detail", locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
 end
 
 
 get '/persons/:id/pdf' do |id|
   content_type 'application/pdf'
-
-  # 'attachment' tells the browser to download the file instead of showing it inline in the browser.
-  # the file name is the one the browser suggests to use in the save dialog.
   attachment 'skill_profile.pdf'
 
   create_person(Person.find(id))
@@ -72,9 +69,9 @@ post '/persons/:id' do |id|
   skill_id = params['skill']
   level = params['level']
   
-  person.skills.create(Skill.find(skill_id), :level => level)
+  person.skills.create(Skill.find(skill_id), level: level)
   
-  erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
+  erb :"person/detail", locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
 end
 
 get '/skillcategories' do
@@ -91,18 +88,19 @@ end
 
 
 get '/projects' do
-  erb :"project/list", locals: { projects: Project.all}
+  erb :"project/list", locals: { projects: Project.all }
 end
 
 get '/projects/:id' do |id|
-  erb :"project/detail", :locals => { :project => Project.find(id) }
+  erb :"project/detail", :locals => { project: Project.find(id) }
 end
 
 post '/projects' do
   abvr = params['abvr']
   description = params['description']
   title = params['title']
-  person = Project.create!(abvr:abvr, description:description, title:title)
+  Project.create!(abvr: abvr, description: description, title: title)
+
   erb :index
 end
 
@@ -115,4 +113,3 @@ helpers do
     Person.search(search)
   end
 end
-

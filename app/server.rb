@@ -39,6 +39,7 @@ get '/skills/:id' do |id|
   erb :"skill/detail", locals: { skill: Skill.find(id) }
 end
 
+
 get '/persons' do
   erb :"person/list", locals: { persons: Person.all }
 end
@@ -48,13 +49,12 @@ post '/persons' do
   lastname = params['lastname']
   person = Person.create!(firstname: firstname, lastname: lastname)
 
-  erb :"person/detail", locals: { person: person, skills: Skill.all, levels: SKILL_LEVELS }
+  redirect "/persons/#{person.id}"
 end
 
 get '/persons/:id' do |id|
   erb :"person/detail", locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
 end
-
 
 get '/persons/:id/pdf' do |id|
   content_type 'application/pdf'
@@ -63,16 +63,15 @@ get '/persons/:id/pdf' do |id|
   create_person(Person.find(id))
 end
 
-
 post '/persons/:id' do |id|
   person = Person.find(id)
   skill_id = params['skill']
   level = params['level']
-  
   person.skills.create(Skill.find(skill_id), level: level)
   
-  erb :"person/detail", locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
+  redirect "/persons/#{id}"
 end
+
 
 get '/skillcategories' do
   erb :"skillcategory/list", locals: { skillcategories: SkillCategory.all }
@@ -81,6 +80,7 @@ end
 get '/skillcategories/:id' do |id|
   erb :"skillcategory/detail", locals: { skillcategory: SkillCategory.find(id) }
 end
+
 
 get '/database' do
   erb :database
@@ -103,6 +103,7 @@ post '/projects' do
 
   erb :index
 end
+
 
 helpers do  
   def abbreviate_skill_level(level) 

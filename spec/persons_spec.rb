@@ -21,7 +21,7 @@ describe 'Skilda Webapp' do
       click_link('create-btn')
       fill_in('firstname', with: 'Mats')
       fill_in('lastname', with: 'Hummels')
-      click_button('create')
+      click_button('Speichern')
 
       expect(page).to have_xpath('//h1', text: 'Mats Hummels')
       visit('/persons')

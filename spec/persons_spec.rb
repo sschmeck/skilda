@@ -29,7 +29,14 @@ describe 'Skilda Webapp' do
     end
 
     it 'updates existing persons'
-    it 'deletes existing persons'
+
+    it 'deletes existing persons' do
+      person = Person.create(firstname: 'Marco', lastname: 'Reus')
+      visit('/persons')
+      click_button("delete-#{person.id}")
+      
+      expect(page).to have_no_content('Reus')
+    end
 
   end
 

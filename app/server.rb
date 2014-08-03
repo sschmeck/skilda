@@ -72,6 +72,11 @@ post '/persons/:id' do |id|
   redirect "/persons/#{id}"
 end
 
+delete '/person/:id' do |id|
+  Person.find(id).destroy
+  
+  redirect "/persons"
+end
 
 get '/skillcategories' do
   erb :"skillcategory/list", locals: { skillcategories: SkillCategory.all }

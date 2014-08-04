@@ -63,7 +63,7 @@ get '/persons/:id/pdf' do |id|
   # the file name is the one the browser suggests to use in the save dialog.
   attachment 'skill_profile.pdf'
 
-  create_person(Person.find(id))
+  create_skill_profile_pdf(Person.find(id))
 end
 
 

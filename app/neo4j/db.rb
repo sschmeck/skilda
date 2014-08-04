@@ -7,10 +7,10 @@ module Neo4j
         neo4j_url = ENV['GRAPHENEDB_URL'] || 'http://localhost:7474'
         uri = URI.parse(neo4j_url)
         server_url = "http://#{uri.host}:#{uri.port}"
- 
+
         Neo4j::Session.open(:server_db, 
                             server_url,
-                            basic_auth: { username: uri.user, password: uri.password})
+                            basic_auth: { username: uri.user, password: uri.password })
       end
     rescue => error
       puts "Could not establish connection to neo4j database: #{error}"

@@ -13,6 +13,16 @@ SKILL_LEVELS = { 'Grundlagen' => 'G',
                  'Professionell' => 'P',
                  'Experte' => 'E' }
 
+helpers do  
+  def abbreviate_skill_level(level) 
+    SKILL_LEVELS[level]
+  end
+  
+  def search(search)
+    Person.search(search)
+  end
+end
+
 # routes
 get '/' do
   @search = params['search']
@@ -26,11 +36,8 @@ get '/skills' do
 end
 
 post '/skills' do
-  name = params['name']
-  category_id = params['category']
-  description = params['description']
-  skill = Skill.create!(name: name, description: description) 
-  skill.categories.create(SkillCategory.find(category_id))
+  skill = Skill.create!(params.slice('name', 'description')) 
+  skill.categories.create(SkillCategory.find(params['category']))
   
   redirect "/skills/#{skill.id}"
 end
@@ -45,9 +52,7 @@ get '/persons' do
 end
 
 post '/persons' do
-  firstname = params['firstname']
-  lastname = params['lastname']
-  person = Person.create!(firstname: firstname, lastname: lastname)
+  person = Person.create!(params.slice('firstname', 'lastname'))
 
   redirect "/persons/#{person.id}"
 end
@@ -107,15 +112,4 @@ post '/projects' do
   Project.create!(abvr: abvr, description: description, title: title)
 
   erb :index
-end
-
-
-helpers do  
-  def abbreviate_skill_level(level) 
-    SKILL_LEVELS[level]
-  end
-  
-  def search(search)
-    Person.search(search)
-  end
 end

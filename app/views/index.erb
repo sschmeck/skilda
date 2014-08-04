@@ -7,7 +7,7 @@
   </div>
   <% if !@search.nil? %>
     <h4><%= !@results.empty? ? 'Treffer' : 'Keine Treffer' %></h4>
-    <ul>
+    <ul id="result-list">
       <% @results.each do |node| %>
         <li><%= erb "#{node.labels.first.downcase}/list_item".to_sym, :locals => { :item => node } %></li>
       <% end %>

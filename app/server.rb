@@ -8,103 +8,10 @@ require_relative 'business/pdf_creator'
 
 helpers PdfCreator
 
-SKILL_LEVELS = { "Grundlagen" => "G", 
-                 "Fortgeschritten" => "F",
-                 "Professionell" => "P",
-                 "Experte" => "E" }
-
-# routes
-get '/' do
-  @search= params['search']
-  @results = @search ? search(@search) : [] 
-
-  erb :index
-end
-
-get '/skills' do
-  erb :"skill/list", locals: { skills: Skill.all, categories: SkillCategory.all }
-end
-
-post '/skills' do
-  name = params['name']
-  category_id = params['category']
-  description = params['description']
-  skill = Skill.create!(name:name, description:description) 
-  skill.categories.create(SkillCategory.find(category_id))
-  
-  redirect "/skills/#{skill.id}"
-end
-
-get '/skills/:id' do |id|
-  erb :"skill/detail", :locals => { :skill => Skill.find(id) }
-end
-
-get '/persons' do
-  erb :"person/list", locals: { persons: Person.all }
-end
-
-post '/persons' do
-  firstname = params['firstname']
-  lastname = params['lastname']
-  person = Person.create!(firstname:firstname, lastname:lastname)
-
-  erb :"person/detail", :locals => { :person => person, :skills => Skill.all, :levels => SKILL_LEVELS  }
-end
-
-get '/persons/:id' do |id|
-  erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
-end
-
-
-get '/persons/:id/pdf' do |id|
-  content_type 'application/pdf'
-
-  # 'attachment' tells the browser to download the file instead of showing it inline in the browser.
-  # the file name is the one the browser suggests to use in the save dialog.
-  attachment 'skill_profile.pdf'
-
-  create_skill_profile_pdf(Person.find(id))
-end
-
-
-post '/persons/:id' do |id|
-  person = Person.find(id)
-  skill_id = params['skill']
-  level = params['level']
-  
-  person.skills.create(Skill.find(skill_id), :level => level)
-  
-  erb :"person/detail", :locals => { :person => Person.find(id), :skills => Skill.all, :levels => SKILL_LEVELS }
-end
-
-get '/skillcategories' do
-  erb :"skillcategory/list", locals: { skillcategories: SkillCategory.all }
-end
-
-get '/skillcategories/:id' do |id|
-  erb :"skillcategory/detail", locals: { skillcategory: SkillCategory.find(id) }
-end
-
-get '/database' do
-  erb :database
-end
-
-
-get '/projects' do
-  erb :"project/list", locals: { projects: Project.all}
-end
-
-get '/projects/:id' do |id|
-  erb :"project/detail", :locals => { :project => Project.find(id) }
-end
-
-post '/projects' do
-  abvr = params['abvr']
-  description = params['description']
-  title = params['title']
-  person = Project.create!(abvr:abvr, description:description, title:title)
-  erb :index
-end
+SKILL_LEVELS = { 'Grundlagen' => 'G', 
+                 'Fortgeschritten' => 'F',
+                 'Professionell' => 'P',
+                 'Experte' => 'E' }
 
 helpers do  
   def abbreviate_skill_level(level) 
@@ -116,3 +23,93 @@ helpers do
   end
 end
 
+# routes
+get '/' do
+  @search = params['search']
+  @results = @search ? search(@search) : [] 
+
+  erb :index
+end
+
+get '/skills' do
+  erb :'skill/list', locals: { skills: Skill.all, categories: SkillCategory.all }
+end
+
+post '/skills' do
+  skill = Skill.create!(params.slice('name', 'description')) 
+  skill.categories.create(SkillCategory.find(params['category']))
+  
+  redirect "/skills/#{skill.id}"
+end
+
+get '/skills/:id' do |id|
+  erb :'skill/detail', locals: { skill: Skill.find(id) }
+end
+
+
+get '/persons' do
+  erb :'person/list', locals: { persons: Person.all }
+end
+
+post '/persons' do
+  person = Person.create!(params.slice('firstname', 'lastname'))
+
+  redirect "/persons/#{person.id}"
+end
+
+get '/persons/:id' do |id|
+  erb :'person/detail', locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
+end
+
+get '/persons/:id/pdf' do |id|
+  content_type 'application/pdf'
+  attachment 'skill_profile.pdf'
+
+  create_skill_profile_pdf(Person.find(id))
+end
+
+post '/persons/:id' do |id|
+  person = Person.find(id)
+  skill_id = params['skill']
+  level = params['level']
+  person.skills.create(Skill.find(skill_id), level: level)
+  
+  redirect "/persons/#{id}"
+end
+
+delete '/person/:id' do |id|
+  Person.find(id).destroy
+  
+  redirect '/persons'
+end
+
+get '/skillcategories' do
+  erb :'skillcategory/list', locals: { skillcategories: SkillCategory.all }
+end
+
+get '/skillcategories/:id' do |id|
+  erb :'skillcategory/detail', locals: { skillcategory: SkillCategory.find(id) }
+end
+
+
+get '/database' do
+  erb :database
+end
+
+
+get '/projects' do
+  erb :'project/list', locals: { projects: Project.all }
+end
+
+get '/projects/:id' do |id|
+  erb :'project/detail', locals: { project: Project.find(id) }
+end
+
+post '/projects' do
+  abvr = params['abvr']
+  description = params['description']
+  title = params['title']
+  Project.create!(abvr: abvr, description: description, title: title)
+
+  erb :index
+end

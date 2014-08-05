@@ -35,7 +35,7 @@ describe 'Skilda Webapp' do
 
       result_list = all('//ul[@id="result-list"]/li')
       expect(result_list.size).to eq(2)
-      expect(result_list.map { |li| li.text.split("\s").first } .sort).to eq(%w{Marco Thomas})
+      expect(result_list.map { |li| li.text.split("\s").first }.sort).to eq(%w{Marco Thomas})
     end
 
     it 'should perform a unsuccesful search' do

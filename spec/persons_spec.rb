@@ -9,11 +9,11 @@ describe 'Skilda Webapp' do
       Person.create(firstname: 'Marco', lastname: 'Reus')
       Person.create(firstname: 'Thomas', lastname: 'Müller')
       Person.create(firstname: 'Mats', lastname: 'Hummels')
-      
+
       visit('/persons')
       person_list = all('//ul[@id="item-list"]/li')
       expect(person_list.size).to eq(3)
-      expect(person_list.map{ |li| li.text.split("\s").first }.sort).to eq(%w{Marco Mats Thomas})
+      expect(person_list.map { |li| li.text.split("\s").first }.sort).to eq(%w{Marco Mats Thomas})
     end
 
     it 'create new persons' do
@@ -34,7 +34,7 @@ describe 'Skilda Webapp' do
       person = Person.create(firstname: 'Marco', lastname: 'Reus')
       visit('/persons')
       click_button("delete-#{person.id}")
-      
+
       expect(page).to have_no_content('Reus')
     end
 

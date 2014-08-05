@@ -8,9 +8,9 @@ module Neo4j
         uri = URI.parse(neo4j_url)
         server_url = "http://#{uri.host}:#{uri.port}"
 
-        Neo4j::Session.open(:server_db, 
+        Neo4j::Session.open(:server_db,
                             server_url,
-                            basic_auth: { username: uri.user, password: uri.password })
+                            basic_auth: {username: uri.user, password: uri.password})
       end
     rescue => error
       puts "Could not establish connection to neo4j database: #{error}"
@@ -18,7 +18,7 @@ module Neo4j
     end
 
     def self.execute_file(file)
-      establish_connection 
+      establish_connection
       File.open(file, 'r') { |f| f.read }.split(';').each do |stmt|
         Neo4j::Session.current._query(stmt) unless stmt.blank?
       end

@@ -6,10 +6,10 @@ describe Person do
   it 'contains firstname and lastname' do
     person = Person.create(firstname: 'Manuel', lastname: 'Neuer')
 
-    expect(person.firstname).to eq('Manuel')    
-    expect(person.lastname).to eq('Neuer')    
-    expect(person.name).to eq('Manuel Neuer')    
-    expect(person.to_s).to eq('Neuer, Manuel')    
+    expect(person.firstname).to eq('Manuel')
+    expect(person.lastname).to eq('Neuer')
+    expect(person.name).to eq('Manuel Neuer')
+    expect(person.to_s).to eq('Neuer, Manuel')
   end
 
   it 'refers to skills' do
@@ -36,8 +36,8 @@ describe Person do
     p2.skills.create(Skill.create(name: 'Shooting'))
     p3 = Person.create(firstname: 'Rene', lastname: 'Adler')
     p3.skills.create(s1)
-        
-    results = Person.search('Jumping') 
+
+    results = Person.search('Jumping')
     expect(results.map(&:firstname).sort).to eq(%w{Manuel Rene})
   end
 

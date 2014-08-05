@@ -18,10 +18,10 @@ describe 'Skilda Webapp' do
 
     it 'create new persons' do
       visit('/persons')
-      click_link('create-btn')
+      click_on('create-btn')
       fill_in('firstname', with: 'Mats')
       fill_in('lastname', with: 'Hummels')
-      click_button('Speichern')
+      click_on('Speichern')
 
       expect(page).to have_xpath('//h1', text: 'Mats Hummels')
       visit('/persons')
@@ -33,7 +33,7 @@ describe 'Skilda Webapp' do
     it 'deletes existing persons' do
       person = Person.create(firstname: 'Marco', lastname: 'Reus')
       visit('/persons')
-      click_button("delete-#{person.id}")
+      click_on("delete-#{person.id}")
 
       expect(page).to have_no_content('Reus')
     end
@@ -41,8 +41,11 @@ describe 'Skilda Webapp' do
     it 'delivers profiles as pdf' do
       person = Person.create(firstname: 'Marco', lastname: 'Reus')
       visit('/persons')
-      click_link('Marco Reus')
-      click_button
+      click_on('Marco Reus')
+      click_on('Export PDF')
+
+      expect(page.response_headers['Content-Type']).to eq('application/pdf')
+      expect(page.driver.response.headers['Content-Disposition']).to include('filename="skill_profile.pdf"')
     end
 
   end

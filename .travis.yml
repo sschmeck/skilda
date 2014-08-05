@@ -3,6 +3,7 @@ language: ruby
 before_script:
 - bundle exec rake neo4j:install
 - bundle exec rake neo4j:start
+- sudo apt-get install wkhtmltopdf
 
 script:
 - bundle exec rake spec

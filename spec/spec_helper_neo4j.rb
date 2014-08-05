@@ -1,8 +1,7 @@
 require 'neo4j'
 
 def create_session
-  # TODO use Neo4j:Db class
-  Neo4j::Session.open(:server_db, "http://localhost:7474")
+  Neo4j::Session.open(:server_db, 'http://localhost:7474')
 end
 
 def delete_db

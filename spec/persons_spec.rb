@@ -39,7 +39,7 @@ describe 'Skilda Webapp' do
     end
 
     it 'delivers profiles as pdf' do
-      person = Person.create(firstname: 'Marco', lastname: 'Reus')
+      Person.create(firstname: 'Marco', lastname: 'Reus')
       visit('/persons')
       click_on('Marco Reus')
       click_on('Export PDF')

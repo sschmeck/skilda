@@ -12,7 +12,7 @@ require_relative '../app/server'
 module RSpecMixin
   include Rack::Test::Methods
 
-  def app()
+  def app
     Sinatra::Application
   end
 end

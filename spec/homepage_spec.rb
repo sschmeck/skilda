@@ -7,7 +7,7 @@ describe 'Skilda Webapp' do
 
     before(:each) { visit '/' }
 
-    it "should allow accessing the home page" do
+    it 'should allow accessing the home page' do
       get '/'
       expect(last_response).to be_ok
     end
@@ -23,7 +23,7 @@ describe 'Skilda Webapp' do
       expect(page).to have_content('Keine Treffer')
     end
 
-    it 'should perform a succesful search' do
+    it 'should perform a successful search' do
       s = Skill.create(name: 'Java')
       p1 = Person.create!(firstname: 'Marco', lastname: 'Reus')
       p2 = Person.create!(firstname: 'Thomas', lastname: 'Müller')
@@ -38,7 +38,7 @@ describe 'Skilda Webapp' do
       expect(result_list.map { |li| li.text.split("\s").first }.sort).to eq(%w{Marco Thomas})
     end
 
-    it 'should perform a unsuccesful search' do
+    it 'should perform a unsuccessful search' do
       fill_in('search', with: 'Jabba')
       click_button('search-btn')
       expect(page).to have_content('Keine Treffer')

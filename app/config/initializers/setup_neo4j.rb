@@ -2,7 +2,7 @@ require 'neo4j'
 require_relative '../../neo4j/db'
 
 # monkey patch gem
-puts "Patching support for upper case relation names .."
+puts 'Patching support for upper case relation names ..'
 Neo4j::ActiveNode::HasN::ClassMethods.module_eval do
   def has_n(name, rel_type = name)
     clazz = self
@@ -29,10 +29,10 @@ Neo4j::ActiveNode::HasN::ClassMethods.module_eval do
 end
 
 # connect to database
-puts "Establish neo4j connection .."
+puts 'Establish neo4j connection ..'
 Neo4j::Db.establish_connection
 
 # load models
-puts "Loading models .."
+puts 'Loading models ..'
 model_dir = File.join(File.dirname(__FILE__), '..', '..', 'models')
 Dir.glob(File.join(model_dir, '*.rb')).each { |f| require f }

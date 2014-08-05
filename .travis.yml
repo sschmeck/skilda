@@ -1,10 +1,12 @@
 language: ruby
 
-before_install:
-  - sudo apt-get install -y openssl build-essential xorg libssl-dev wkhtmltopdf
-  - WHICH_WK=`which wkhtmltopdf`
-  - "export WKHTMLTOPDF_CMD=$WHICH_WK"
-
+install:
+  - sudo apt-get install -y openssl build-essential xorg libssl-dev
+  - wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
+  - tar xvjf wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
+  - sudo chown root:root wkhtmltopdf-amd64
+  - sudo mv wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf
+  
 before_script:
 - bundle exec rake neo4j:install
 - bundle exec rake neo4j:start

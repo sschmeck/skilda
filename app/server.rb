@@ -65,7 +65,7 @@ get '/persons/:id/pdf' do |id|
   content_type 'application/pdf'
   attachment 'skill_profile.pdf'
 
-  create_person(Person.find(id))
+  create_skill_profile_pdf(Person.find(id))
 end
 
 post '/persons/:id' do |id|

@@ -38,6 +38,13 @@ describe 'Skilda Webapp' do
       expect(page).to have_no_content('Reus')
     end
 
+    it 'delivers profiles as pdf' do
+      person = Person.create(firstname: 'Marco', lastname: 'Reus')
+      visit('/persons')
+      click_link('Marco Reus')
+      click_button
+    end
+
   end
 
 end

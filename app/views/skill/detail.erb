@@ -1,27 +1,27 @@
 <h2><%= skill.name %></h2>
-	
+
 <div class="panel panel-default">
-	<div class="panel-heading">Details</div>
-	<ul class="list-group">
-    <li class="list-group-item"><strong>Kategorien</strong> 
-			<% skill.categories_rels.each do |skillcategories_rel| %>
-				<% skillcategory = skillcategories_rel.end_node %>
-				<%= erb :"skillcategory/list_item", locals: { item: skillcategory } %>
-			<% end %>
-		</li>
-    <li class="list-group-item"><strong>Synonyme</strong> <%= skill.synonyms.to_a.join(', ') %></li>
-	</ul>
-	<div class="panel-body">
-	    <p><strong>Beschreibung</strong> <%= skill.description %></p>
-	</div>
-	<ul class="list-group">
-		<li class="list-group-item"><strong>Personen</strong> 
-			<% skill.persons_rels.each do |persons_rel| %>
-        <% person = persons_rel.start_node %>
-        <a href="/persons/<%= person.id %>" title="<%= person.name %> (<%= persons_rel[:level] %>)"><%= person.name %> 
-					<span class="badge alert-info"><%=abbreviate_skill_level persons_rel[:level] %></span>
-				</a>
+  <div class="panel-heading">Details</div>
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Kategorien</strong>
+      <% skill.categories_rels.each do |skillcategories_rel| %>
+          <% skillcategory = skillcategories_rel.end_node %>
+          <%= erb :"skillcategory/list_item", locals: { item: skillcategory } %>
       <% end %>
-		</li>
-	</ul>
+    </li>
+    <li class="list-group-item"><strong>Synonyme</strong> <%= skill.synonyms.to_a.join(', ') %></li>
+  </ul>
+  <div class="panel-body">
+    <p><strong>Beschreibung</strong> <%= skill.description %></p>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Personen</strong>
+      <% skill.persons_rels.each do |persons_rel| %>
+          <% person = persons_rel.start_node %>
+          <a href="/persons/<%= person.id %>" title="<%= person.name %> (<%= persons_rel[:level] %>)"><%= person.name %>
+            <span class="badge alert-info"><%= abbreviate_skill_level persons_rel[:level] %></span>
+          </a>
+      <% end %>
+    </li>
+  </ul>
 </div>

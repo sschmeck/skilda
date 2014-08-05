@@ -10,7 +10,7 @@ module Neo4j
 
         Neo4j::Session.open(:server_db,
                             server_url,
-                            basic_auth: {username: uri.user, password: uri.password})
+                            basic_auth: { username: uri.user, password: uri.password })
       end
     rescue => error
       puts "Could not establish connection to neo4j database: #{error}"

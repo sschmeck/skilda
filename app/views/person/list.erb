@@ -1,13 +1,14 @@
-<h3>Personen  <a id="create-btn" href="#form" class="btn btn-default btn-xs">
+<h3>Personen <a id="create-btn" href="#form" class="btn btn-default btn-xs">
   <span class="glyphicon glyphicon-plus"></span>
 </a></h3>
 <ul id="item-list">
   <% persons.each do |person| %>
-    <li><%= erb :'person/list_item', locals: { item: person } %></li>
+      <li><%= erb :'person/list_item', locals: { item: person } %></li>
   <% end %>
 </ul>
 <div id="form">
   <h3>Neue Person erstellen</h3>
+
   <form class="form-horizontal" role="form" action="/persons" method="post">
     <%= erb :'person/form_input', locals: { person: Person.new } %>
   </form>

@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/respond_with'
 
+Log = Logger.new(STDOUT)
+Log.formatter = proc { |severity, *, msg| "[#{severity}] #{msg}\n" }
 require_relative 'config/initializers/setup_neo4j'
 
 require 'wkhtmltopdf-heroku' if production?

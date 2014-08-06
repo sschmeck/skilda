@@ -20,6 +20,15 @@ describe Person do
     expect(person.skills.map(&:name).sort).to eq(%w{Jumping Running})
   end
 
+  it 'refers to skills with level attribute' do
+    person = Person.create(firstname: 'Manuel', lastname: 'Neuer')
+    person.skills.create(Skill.create(name: 'Jumping'), level: 'Experte')
+    person.skills.create(Skill.create(name: 'Running'), level: 'Fortgeschritten')
+
+    skills_with_level = person.skills_rels.map { |r| "#{r.end_node.name}-#{r[:level]}" }.sort
+    expect(skills_with_level).to eq(%w{Jumping-Experte Running-Fortgeschritten})
+  end
+
   it 'refers to projects' do
     person = Person.create(firstname: 'Manuel', lastname: 'Neuer')
     person.projects.create(Project.create(title: 'Deutscher Meister'))

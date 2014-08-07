@@ -1,8 +1,15 @@
 require 'sinatra'
 require 'sinatra/respond_with'
 
+require 'logger'
 Log = Logger.new(STDOUT)
-Log.formatter = proc { |severity, *, msg| "[#{severity}] #{msg}\n" }
+Log.formatter = proc do |severity, datetime, *, msg|
+  "[#{datetime.strftime('%Y-%m-%d %H:%M:%S')}] #{severity}  #{msg}\n"
+end
+# With next sinatra-contrib release ..
+# require 'sinatra/custom_logger'
+# set :logger, Log # => next sinatra
+
 require_relative 'config/initializers/setup_neo4j'
 
 require 'wkhtmltopdf-heroku' if production?

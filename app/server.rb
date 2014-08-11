@@ -6,9 +6,6 @@ Log = Logger.new(STDOUT)
 Log.formatter = proc do |severity, datetime, *, msg|
   "[#{datetime.strftime('%Y-%m-%d %H:%M:%S')}] #{severity}  #{msg}\n"
 end
-# With next sinatra-contrib release ..
-# require 'sinatra/custom_logger'
-# set :logger, Log # => next sinatra
 
 require_relative 'config/initializers/setup_neo4j'
 
@@ -77,6 +74,15 @@ get '/persons/:id/pdf' do |id|
   create_skill_profile_pdf(Person.find(id))
 end
 
+put '/persons/:id' do |id|
+  person = Person.find(id)
+  person.firstname = params['firstname']
+  person.lastname = params['lastname']
+  person.save!
+
+  redirect "/persons/#{id}"
+end
+
 post '/persons/:id' do |id|
   person = Person.find(id)
   skill_id = params['skill']
@@ -86,7 +92,7 @@ post '/persons/:id' do |id|
   redirect "/persons/#{id}"
 end
 
-delete '/person/:id' do |id|
+delete '/persons/:id' do |id|
   Person.find(id).destroy
 
   redirect '/persons'

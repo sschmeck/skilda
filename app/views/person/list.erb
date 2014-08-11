@@ -11,5 +11,10 @@
 
   <form class="form-horizontal" role="form" action="/persons" method="post">
     <%= erb :'person/form_input', locals: { person: Person.new } %>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Erstellen</button>
+      </div>
+    </div>
   </form>
 </div>

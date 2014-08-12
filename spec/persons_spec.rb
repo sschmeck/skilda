@@ -28,7 +28,16 @@ describe 'Skilda Webapp' do
       expect(all('//ul[@id="item-list"]/li').size).to eq(1)
     end
 
-    it 'updates existing persons'
+    it 'updates existing persons' do
+      Person.create(firstname: 'Mario', lastname: 'Gomez')
+      visit('/persons')
+      click_on('Mario Gomez')
+      #find('#edit-btn').click
+      fill_in('lastname', with: 'Götze')
+      click_on('Speichern')
+
+      expect(page).to have_xpath('//h1', text: 'Mario Götze')
+    end
 
     it 'deletes existing persons' do
       Person.create(firstname: 'Marco', lastname: 'Reus')

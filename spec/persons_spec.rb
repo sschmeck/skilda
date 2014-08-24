@@ -32,7 +32,7 @@ describe 'Skilda Webapp' do
       Person.create(firstname: 'Mario', lastname: 'Gomez')
       visit('/persons')
       click_on('Mario Gomez')
-      #find('#edit-btn').click
+      click_on('edit-btn')
       fill_in('lastname', with: 'Götze')
       click_on('Speichern')
 

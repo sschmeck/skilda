@@ -1,0 +1,69 @@
+<h1><%= person.name %></h1>
+
+<div id="edit-form">
+  <form class="form-horizontal" role="form" action="/persons/<%= person.id %>" method="post">
+    <input name="_method" value="put" type="hidden"/>
+    <%= erb :'person/form_input', locals: { person: person } %>
+    <h2>Skills
+      <a href="#form" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+    </h2>
+
+    <p>
+      <% person.skills_rels.each do |skills_rel| %>
+          <% skill = skills_rel.end_node %>
+          <span id="skill-<%= skill.id %>" class="badge alert-info">
+          <a href="/skills/<%= skill.id %>" title="<%= skill.name %> (<%= skills_rel[:level] %>)"><%= skill.name %>
+          </a>
+          <select class="badge alert-info" id="skill-<%= skill.id %>-level" name="skill-<%= skill.id %>">
+            <option class="label-danger" value="G" <%= 'selected' if 'G' == abbreviate_skill_level(skills_rel[:level]) %>>G</option>
+            <option class="label-warning" value="F" <%= 'selected' if 'F' == abbreviate_skill_level(skills_rel[:level]) %>>F</option>
+            <option class="label-success" value="P" <%= 'selected' if 'P' == abbreviate_skill_level(skills_rel[:level]) %>>P</option>
+            <option class="text-info" value="E" <%= 'selected' if 'E' == abbreviate_skill_level(skills_rel[:level]) %>>E</option>
+          </select>
+           <a onclick="$('#skill-<%= skill.id %>').remove();" class="badge">
+             <span class="glyphicon glyphicon-remove"></span>
+           </a>
+          </span>
+    <% end %>
+    </p>
+
+    <div class="form-inline">
+      <button type="reset" class="btn btn-default" onclick="$('#edit-form').addClass('hidden')">Abbrechen</button>
+      <button type="submit" class="btn btn-primary">Speichern</button>
+    </div>
+  </form>
+</div>
+
+<div id="form">
+  <h3>Add Skill</h3>
+
+  <form class="form-inline" role="form" action="/persons/<%= person.id %>" method="post">
+    <div class="form-group">
+      <label for="skill" class="col-sm-2 control-label">Skill</label>
+
+      <div class="input-group">
+        <select name="skill" class="form-control">
+          <% skills.each do |skill| %>
+              <option value="<%= skill.id %>"><%= skill.name %></option>
+          <% end %>
+        </select>
+
+        <div class="input-group-addon">
+          <select name="level" class="form-control">
+            <% levels.each_key do |level| %>
+                <option><%= level %></option>
+            <% end %>
+
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">add</button>
+      </div>
+    </div>
+  </form>
+</div>

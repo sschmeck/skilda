@@ -1,8 +1,8 @@
-  <form class="form-inline" role="form" action="/persons/<%= person.id %>" method="post">
-<h1>
+<form class="form-inline" role="form" action="/persons/<%= person.id %>" method="post">
+  <h1>
     <%= person.name %>
     <div class="btn-group">
-      <a id="edit-btn" onclick="$('#edit-form.hidden').removeClass('hidden');" class="btn btn-default">
+      <a id="edit-btn" class="btn btn-default" href="/persons/<%= person.id %>/edit">
         <span class="glyphicon glyphicon-pencil"></span>
       </a>
       <a id="export-pdf-btn" class="btn btn-default" href="/persons/<%= person.id %>/pdf">
@@ -13,8 +13,8 @@
         <span class="glyphicon glyphicon-trash"></span>
       </button>
     </div>
-</h1>
-  </form>
+  </h1>
+</form>
 
 <div id="edit-form" class="hidden">
   <form class="form-horizontal" role="form" action="/persons/<%= person.id %>" method="post">
@@ -85,4 +85,3 @@
 
     <a href="/projects/<%= project.id %>" title="<%= project.title %>"><%= project.title %> </a>
 <% end %>
-

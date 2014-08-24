@@ -67,6 +67,10 @@ get '/persons/:id' do |id|
   erb :'person/detail', locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
 end
 
+get '/persons/:id/edit' do |id|
+  erb :'person/detail_edit', locals: { person: Person.find(id), skills: Skill.all, levels: SKILL_LEVELS }
+end
+
 get '/persons/:id/pdf' do |id|
   content_type 'application/pdf'
   attachment 'skill_profile.pdf'
@@ -75,21 +79,23 @@ get '/persons/:id/pdf' do |id|
 end
 
 put '/persons/:id' do |id|
+  puts "PERSON #{params.inspect}"
   person = Person.find(id)
   person.firstname = params['firstname']
   person.lastname = params['lastname']
   person.save!
 
-  redirect "/persons/#{id}"
+  redirect request.referrer
 end
 
 post '/persons/:id' do |id|
+  puts "PERSON #{params.inspect}"
   person = Person.find(id)
   skill_id = params['skill']
   level = params['level']
   person.skills.create(Skill.find(skill_id), level: level)
 
-  redirect "/persons/#{id}"
+  redirect request.referrer
 end
 
 delete '/persons/:id' do |id|

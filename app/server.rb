@@ -83,6 +83,7 @@ put '/persons/:id' do |id|
   person = Person.find(id)
   person.firstname = params['firstname']
   person.lastname = params['lastname']
+  person.update_skills(params.select {|k,*| k =~ /^skill-/ })
   person.save!
 
   redirect request.referrer

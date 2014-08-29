@@ -18,6 +18,14 @@ class Person
     "#{lastname}, #{firstname}"
   end
 
+  def update_skills(skill_hash)
+    # replaces all relations
+    self.skills = []
+    skill_hash.each do |element_id,level|
+      self.skills.create(element_id.gsub('skill-', '').to_i, level: level)
+    end
+  end
+
   def self.search(search)
     if search.length == 0
       []

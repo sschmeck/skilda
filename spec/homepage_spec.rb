@@ -27,8 +27,8 @@ describe 'Skilda Webapp' do
       s = Skill.create(name: 'Java')
       p1 = Person.create!(firstname: 'Marco', lastname: 'Reus')
       p2 = Person.create!(firstname: 'Thomas', lastname: 'Müller')
-      p1.skills.create(s)
-      p2.skills.create(s)
+      p1.skills << s
+      p2.skills << s
 
       fill_in('search', with: 'Java')
       click_button('search-btn')

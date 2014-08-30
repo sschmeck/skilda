@@ -5,5 +5,5 @@ class Project
   property :description
   property :title
 
-  has_n('persons').from(:WORKED_FOR)
+  has_many :in, :persons, type: 'WORKED_FOR'
 end

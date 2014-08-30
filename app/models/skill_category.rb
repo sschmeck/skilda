@@ -5,5 +5,5 @@ class SkillCategory
 
   validates :name, presence: true
 
-  has_n(:skills).from(:IS_A)
+  has_many :in, :skills, type: 'IS_A'
 end

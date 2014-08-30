@@ -7,6 +7,6 @@ class Skill
 
   validates :name, presence: true
 
-  has_n('persons').from(:HAS_SKILL)
-  has_n('categories', :IS_A)
+  has_many :in, :persons, type: 'HAS_SKILL'
+  has_many :out, :categories, model_class: SkillCategory, type: 'HAS_SKILL'
 end

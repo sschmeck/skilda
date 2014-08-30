@@ -14,8 +14,8 @@ describe Person do
 
   it 'refers to skills' do
     person = Person.create(firstname: 'Manuel', lastname: 'Neuer')
-    person.skills.create(Skill.create(name: 'Jumping'))
-    person.skills.create(Skill.create(name: 'Running'))
+    person.skills << Skill.create(name: 'Jumping')
+    person.skills << Skill.create(name: 'Running')
 
     expect(person.skills.map(&:name).sort).to eq(%w{Jumping Running})
   end
@@ -31,8 +31,8 @@ describe Person do
 
   it 'refers to projects' do
     person = Person.create(firstname: 'Manuel', lastname: 'Neuer')
-    person.projects.create(Project.create(title: 'Deutscher Meister'))
-    person.projects.create(Project.create(title: 'Weltmeister'))
+    person.projects << Project.create(title: 'Deutscher Meister')
+    person.projects << Project.create(title: 'Weltmeister')
 
     expect(person.projects.map(&:title).sort).to eq(['Deutscher Meister', 'Weltmeister'])
   end
@@ -40,11 +40,11 @@ describe Person do
   it 'supports search by skills' do
     p1 = Person.create(firstname: 'Manuel', lastname: 'Neuer')
     s1 = Skill.create(name: 'Jumping')
-    p1.skills.create(s1)
+    p1.skills << s1
     p2 = Person.create(firstname: 'Miroslav', lastname: 'Klose')
-    p2.skills.create(Skill.create(name: 'Shooting'))
+    p2.skills << Skill.create(name: 'Shooting')
     p3 = Person.create(firstname: 'Rene', lastname: 'Adler')
-    p3.skills.create(s1)
+    p3.skills << s1
 
     results = Person.search('Jumping')
     expect(results.map(&:firstname).sort).to eq(%w{Manuel Rene})

@@ -7,11 +7,11 @@ See [demo application](http://skilda.heroku.com).
 * pdfkit gem needs [wkhtmltopdf](http://wkhtmltopdf.org/) (e.g. `sudo apt-get install wkhtmltopdf`)
 * neo4j database needs Java >= 7, `JAVA_HOME` must be set 
 ```
-bundle install       # installs dependencies
-rake neo4j:install   # installs neo4j server (community, 2.0.1)
-rake neo4j:start     # => http://localhost:7474
-rake neo4j:seed      # create seed data
-ruby app/server.rb   # => http://localhost:4567
+bundle install                      # installs dependencies
+rake neo4j:install[community-2.1.3] # installs neo4j server
+rake neo4j:start                    # => http://localhost:7474
+rake neo4j:seed                     # creates seed data
+rackup                              # => http://localhost:9292
 
-rake neo4j:stop      # stops the neo4j server
+rake neo4j:stop                     # stops the neo4j server
 ```

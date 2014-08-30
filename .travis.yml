@@ -7,7 +7,7 @@ before_script:
 - tar xvjf wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
 - sudo chown root:root wkhtmltopdf-amd64
 - sudo mv wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf
-- bundle exec rake neo4j:install
+- bundle exec rake neo4j:install[community-2.1.3]
 - bundle exec rake neo4j:start
 
 script:

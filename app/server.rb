@@ -79,7 +79,6 @@ get '/persons/:id/pdf' do |id|
 end
 
 put '/persons/:id' do |id|
-  puts "PERSON #{params.inspect}"
   person = Person.find(id)
   person.firstname = params['firstname']
   person.lastname = params['lastname']
@@ -90,7 +89,6 @@ put '/persons/:id' do |id|
 end
 
 post '/persons/:id' do |id|
-  puts "PERSON #{params.inspect}"
   person = Person.find(id)
   skill_id = params['skill']
   level = params['level']

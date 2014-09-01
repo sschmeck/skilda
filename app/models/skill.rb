@@ -1,3 +1,5 @@
+require_relative 'skill_category'
+
 class Skill
   include Neo4j::ActiveNode
 

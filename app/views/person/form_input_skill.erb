@@ -1,0 +1,12 @@
+<span id="skill-<%= skill_id %>" class="badge alert-info">
+  <a href="/skills/<%= skill_id %>" title="<%= skill_name %> (<%= level %>)"><%= skill_name %></a>
+  <select class="badge alert-info" id="skill-<%= skill_id %>-level" name="skill-<%= skill_id %>" on>
+    <option value="Grundlagen" <%= 'selected' if 'Grundlagen' == level %>>G</option>
+    <option value="Fortgeschritten" <%= 'selected' if 'Fortgeschritten' == level %>>F</option>
+    <option value="Professionell" <%= 'selected' if 'Professionell' == level %>>P</option>
+    <option value="Experte" <%= 'selected' if 'Experte' == level %>>E</option>
+  </select>
+  <a onclick="$('#skill-<%= skill_id %>').remove();" class="badge">
+    <span class="glyphicon glyphicon-remove"></span>
+  </a>
+</span>

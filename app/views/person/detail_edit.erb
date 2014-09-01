@@ -1,15 +1,14 @@
 <h1><%= person.name %></h1>
-
 <div id="edit-form">
   <form class="form-horizontal" role="form" action="/persons/<%= person.id %>" method="post">
     <input name="_method" value="put" type="hidden"/>
     <%= erb :'person/form_input', locals: { person: person } %>
     <h2>Skills
-      <a href="#form" class="btn btn-default btn-xs">
+      <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#new-skill">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </h2>
-    <p>
+    <p id="skill-list">
       <% person.skills_rels.each do |skills_rel| %>
           <% skill = skills_rel.end_node %>
           <%= erb :'person/form_input_skill', locals: { skill_id: skill.id,
@@ -23,35 +22,73 @@
     </div>
   </form>
 </div>
-
-<div id="form">
-  <h3>Add Skill</h3>
-
-  <form class="form-inline" role="form" action="/persons/<%= person.id %>" method="post">
-    <div class="form-group">
-      <label for="skill" class="col-sm-2 control-label">Skill</label>
-
-      <div class="input-group">
-        <select name="skill" class="form-control">
-          <% skills.each do |skill| %>
-              <option value="<%= skill.id %>"><%= skill.name %></option>
-          <% end %>
-        </select>
-
-        <div class="input-group-addon">
-          <select name="level" class="form-control">
-            <% levels.each_key do |level| %>
-                <option><%= level %></option>
-            <% end %>
-
-          </select>
-        </div>
+<div class="modal fade" id="new-skill">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Fähigkeit hinzufügen</h4>
+      </div>
+      <div class="modal-body" id="new-skill-div">
+        <form id="new-skill-form" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="skill" class="col-sm-2 control-label">Skill</label>
+            <div class="col-sm-10">
+              <select name="skill" class="form-control">
+                <% skills.each do |skill| %>
+                    <option value='{ "id": <%= skill.id %>, "name": "<%= skill.name %>" }'><%= skill.name %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+        <button id="new-skill-submit" type="button" class="btn btn-primary" data-dismiss="modal">Hinzufügen</button>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">add</button>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>
+<script src="/js/jquery.serialize-object.min.js"></script>
+<script type="text/javascript">
+    var _tmplCache = {}
+    this.parseTemplate = function(str, data) {
+        var err = "";
+        try {
+            var func = _tmplCache[str];
+            if (!func) {
+                var strFunc =
+                        "var p=[],print=function(){p.push.apply(p,arguments);};" +
+                        "with(obj){p.push('" +
+                        str.replace(/[\r\t\n]/g, " ")
+                                .replace(/'(?=[^#]*#>)/g, "\t")
+                                .split("'").join("\\'")
+                                .split("\t").join("'")
+                                .replace(/<#=(.+?)#>/g, "',$1,'")
+                                .split("<#").join("');")
+                                .split("#>").join("p.push('")
+                        + "');}return p.join('');";
+
+                //alert(strFunc);
+                func = new Function("obj", strFunc);
+                _tmplCache[str] = func;
+            }
+            return func(data);
+        } catch (e) { err = e.message; }
+        return "< # ERROR: " + err.htmlEncode() + " # >";
+    }
+
+    $(document).ready(function () {
+        $("#new-skill-submit").click(function () {
+            var jsonObj = $('#new-skill-form').serializeObject();
+            jsonObj.skill = JSON.parse(jsonObj.skill);
+            $('#skill-list').append(parseTemplate($("#skill-template").html(), jsonObj ))
+        });
+    });
+</script>
+<script id="skill-template" type="text/html">
+  <%= erb :'person/form_input_skill', locals: { skill_id: '<#= skill.id #>',
+                                                skill_name: '<#= skill.name #>',
+                                                level: 'Grundlagen' } %>
+</script>

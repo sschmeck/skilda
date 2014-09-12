@@ -2,3 +2,7 @@
 .bundle/
 /db/neo4j
 /coverage
+.vagrant
+/cookbooks
+/tmp
+Cheffile.lock

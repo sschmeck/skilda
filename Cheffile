@@ -1,0 +1,10 @@
+# vi: set ft=ruby :
+site "http://community.opscode.com/api/v1"
+
+cookbook 'apt'
+cookbook 'build-essential'
+cookbook 'java'
+cookbook 'neo4j-server', :git => 'http://github.com/michaelklishin/neo4j-server-chef-cookbook'
+cookbook 'ruby_build'
+cookbook 'rbenv', git: 'https://github.com/fnichol/chef-rbenv'
+cookbook 'vim'

@@ -1,5 +1,5 @@
 # skilda [![Build Status](https://secure.travis-ci.org/sschmeck/skilda.png?branch=master)](http://travis-ci.org/sschmeck/skilda) [![Coverage Status](https://coveralls.io/repos/sschmeck/skilda/badge.png?branch=master)](https://coveralls.io/r/sschmeck/skilda?branch=master) [![Code Climate](https://codeclimate.com/github/sschmeck/skilda.png)](https://codeclimate.com/github/sschmeck/skilda) [![PullReview stats](https://www.pullreview.com/github/sschmeck/skilda/badges/master.svg?)](https://www.pullreview.com/github/sschmeck/skilda/reviews/master)
-See [demo application](http://skilda.heroku.com).
+See [demo application](http://skilda.herokuapp.com).
 
 ## Getting started
 

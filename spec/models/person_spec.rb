@@ -65,4 +65,22 @@ describe Person do
     # TODO expectation
   end
 
+  it 'delivers skills by categories' do
+    person = Person.create(firstname: 'Manuel', lastname: 'Neuer')
+    person.skills << skill('Jumping', 'Sports')
+    person.skills << skill('Running', 'Sports')
+    person.skills << skill('Thinking', 'Mental')
+
+    result = person.skills_by_categories
+    expect(result.keys.map(&:name).sort).to eq(%w(Mental Sports))
+    expect(result.find {|k,_| k.name == 'Sports'}.last.map(&:name).sort).to eq(%w(Jumping Running))
+  end
+
+  def skill(name, category)
+    skill = Skill.create(name: name.to_s)
+    category = SkillCategory.find_by(name: category.to_s) || SkillCategory.create(name: category.to_s)
+    skill.category = category
+
+    skill
+  end
 end

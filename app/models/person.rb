@@ -18,6 +18,10 @@ class Person
     "#{lastname}, #{firstname}"
   end
 
+  def skills_by_categories
+    skills.group_by(&:category)
+  end
+
   def update_skills(skill_hash)
     # replaces all relations
     self.skills = []

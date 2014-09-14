@@ -15,9 +15,9 @@ describe Skill do
     # categories should be master data
     category = SkillCategory.create(name: 'Programming')
     skill = Skill.create(name: 'Ruby')
-    skill.categories << category
+    skill.category =  category
 
-    expect(skill.categories.map(&:name)).to eq(%w(Programming))
+    expect(skill.category.name).to eq('Programming')
   end
 
   it 'refers to persons' do

@@ -43,7 +43,7 @@ end
 
 post '/skills' do
   skill = Skill.create!(params.slice('name', 'description'))
-  skill.categories.create(SkillCategory.find(params['category']))
+  skill.category = SkillCategory.find(params['category'])
 
   redirect "/skills/#{skill.id}"
 end

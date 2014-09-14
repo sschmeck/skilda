@@ -10,5 +10,5 @@ class Skill
   validates :name, presence: true
 
   has_many :in, :persons, type: 'HAS_SKILL'
-  has_many :out, :categories, model_class: SkillCategory, type: 'HAS_SKILL'
+  has_one :out, :category, model_class: SkillCategory, type: 'IS_A'
 end

@@ -1,5 +1,5 @@
 require 'rake'
-require 'neo4j/tasks/neo4j_server.rake'
+load 'neo4j/tasks/neo4j_server.rake'
 
 unless ENV['RACK_ENV'] == 'production'
   require 'rspec/core/rake_task'

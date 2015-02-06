@@ -26,7 +26,8 @@ class Person
     # replaces all relations
     self.skills = []
     skill_hash.each do |element_id,level|
-      self.skills.create(element_id.gsub('skill-', '').to_i, level: level)
+      skill = Skill.find_by!(neo_id: element_id.gsub('skill-', '').to_i)
+      self.skills.create(skill, level: level)
     end
   end
 

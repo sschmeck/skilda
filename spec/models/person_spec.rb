@@ -50,19 +50,17 @@ describe Person do
     expect(results.map(&:firstname).sort).to eq(%w{Manuel Rene})
   end
 
-  it 'updates alls given skills' do
+  it 'updates all given skills' do
     p1 = Person.create(firstname: 'Manuel', lastname: 'Neuer')
     s1 = Skill.create(name: 'Jumping')
     p1.skills.create(s1, level: 'Fortgeschritten')
     s2 = Skill.create(name: 'Running')
 
-    p1.update_skills("skill-#{s1.id}" => 'Experte',
-                     "skill-#{s2.id}" => 'Fortgeschritten')
+    p1.update_skills("skill-#{s1.neo_id}" => 'Experte',
+                     "skill-#{s2.neo_id}" => 'Fortgeschritten')
 
     skills_with_level = p1.skills_rels.map { |r| "#{r.end_node.name}-#{r[:level]}" }.sort
     expect(skills_with_level).to eq(%w{Jumping-Experte Running-Fortgeschritten})
-
-    # TODO expectation
   end
 
   it 'delivers skills by categories' do
